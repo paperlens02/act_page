@@ -1,10 +1,11 @@
 ---
 import Navbar from '../components/Navbar.astro';
-const { title = 'Act! 细胞调律' } = Astro.props;
+// 页面标题，Bing/Google 建议长度 15~60 个字符
+const { title = 'Act! 细胞调律 | 创新无轨音游 | Steam试玩版已开放' } = Astro.props;
 
 // 网站基础信息，集中管理方便维护
 const siteUrl = 'https://paperactgames.com';
-const description = 'Act! 细胞调律 - 无轨下落式节奏游戏，试玩版现已开放，2027年初发售。';
+const description = '创新无轨音游《Act! 细胞调律》Steam免费试玩开放中！完全自由的输入策略，轻松沉浸的手柄体验；严选优质曲目，并内置自定义编辑器；明快而深邃的碎片式剧情、充满神秘的收集养成——立即前往Steam免费下载！';
 const ogImage = '/Resources/KV1080P.png';  // 社交分享时的预览图，用 KV 大图最有视觉冲击力
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;  // 当前页面的标准地址
 ---
