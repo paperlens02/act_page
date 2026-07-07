@@ -6,11 +6,14 @@ const afdianUrl = 'https://ifdian.net/a/paperlens';
 <section class="hero" id="hero">
   <div class="overlay"></div>
   <div class="content">
-    <img
-      src="/Resources/logo.png"
-      alt="Act! 细胞调律 游戏 Logo"
-      class="logo"
-    />
+    <!-- h1：页面主标题，用 Logo 图片的 alt 文本作为语义内容，视觉上无变化 -->
+    <h1 class="hero-logo">
+      <img
+        src="/Resources/logo.png"
+        alt="Act! 细胞调律"
+        class="logo"
+      />
+    </h1>
     <p class="tagline">试玩版现已开放</p>
     <p class="release">2027年初发售</p>
     <div class="buttons">
@@ -48,6 +51,13 @@ const afdianUrl = 'https://ifdian.net/a/paperlens';
     text-align: center;
     padding: 2rem;
     max-width: 800px;
+  }
+
+  .hero-logo {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 0;
   }
 
   .logo {
