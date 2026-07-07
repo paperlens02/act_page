@@ -1,0 +1,14 @@
+# robots.txt — 给搜索引擎爬虫的指令文件
+# 放在 public/ 目录下，Astro 构建后会自动复制到网站根目录，
+# 访问 https://paperactgames.com/robots.txt 就能看到。
+
+# User-agent: * 表示对所有搜索引擎爬虫生效（Googlebot、Bingbot、Baiduspider 等）
+User-agent: *
+
+# Allow: / 表示允许抓取整个网站，没有限制
+Allow: /
+
+# Sitemap: 指向站点地图的地址。
+# 这是 @astrojs/sitemap 插件自动生成的文件，
+# 爬虫读了这行就知道去抓取 sitemap-index.xml 获取完整页面列表。
+Sitemap: https://paperactgames.com/sitemap-index.xml

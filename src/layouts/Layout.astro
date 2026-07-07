@@ -1,15 +1,63 @@
 ---
 import Navbar from '../components/Navbar.astro';
 const { title = 'Act! 细胞调律' } = Astro.props;
+
+// 网站基础信息，集中管理方便维护
+const siteUrl = 'https://paperactgames.com';
+const description = 'Act! 细胞调律 - 无轨下落式节奏游戏，试玩版现已开放，2027年初发售。';
+const ogImage = '/Resources/KV1080P.png';  // 社交分享时的预览图，用 KV 大图最有视觉冲击力
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;  // 当前页面的标准地址
 ---
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Act! 细胞调律 - 无轨下落式节奏游戏，试玩版现已开放，2027年初发售。" />
+
+  <!-- === 基础 SEO === -->
+  <!-- description：搜索引擎结果中显示的页面摘要文字，建议 70~160 字 -->
+  <meta name="description" content={description} />
+  <!-- keywords：关键词标签，现在 Google 已不再使用，但百度等部分引擎仍参考 -->
+  <meta name="keywords" content="Act,细胞调律,音游,节奏游戏,独立游戏,试玩版,Steam,paperactgames" />
+  <!-- author：作者信息 -->
+  <meta name="author" content="PaperAct / 纸张lens" />
   <title>{title}</title>
+
+  <!-- === canonical 标签 === -->
+  <!-- 告诉搜索引擎"这个页面的标准地址是什么"，防止重复收录 -->
+  <!-- 比如别人从 /index.html 和 / 两个地址访问同一页面，canonical 统一指向 / -->
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- === 网页图标 === -->
   <link rel="icon" type="image/png" href="/Resources/icon.png" />
+
+  <!-- === Open Graph 标签（社交分享预览卡） === -->
+  <!-- 当有人在 QQ、微信、Discord、Twitter 分享你的链接时， -->
+  <!-- 会显示一个带图片+标题+描述的预览卡片，就是靠这些标签控制的。 -->
+  <!-- og:type=website 表示这是一个网站类型的内容 -->
+  <meta property="og:type" content="website" />
+  <!-- og:site_name：网站名称，显示在预览卡顶部 -->
+  <meta property="og:site_name" content="Act! 细胞调律" />
+  <!-- og:title：分享时显示的标题 -->
+  <meta property="og:title" content={title} />
+  <!-- og:description：分享时显示的描述文字 -->
+  <meta property="og:description" content={description} />
+  <!-- og:url：页面的规范地址 -->
+  <meta property="og:url" content={canonicalUrl} />
+  <!-- og:image：分享时显示的预览图，建议尺寸 1200×630px -->
+  <!-- 这里用绝对路径拼接完整 URL，因为社交平台需要完整地址才能抓到图片 -->
+  <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
+  <!-- og:locale：内容语言，zh_CN 表示简体中文 -->
+  <meta property="og:locale" content="zh_CN" />
+
+  <!-- === Twitter Card 标签 === -->
+  <!-- 专门给 Twitter/X 用的分享预览格式，和 Open Graph 类似但独立配置。 -->
+  <!-- summary_large_image：大图卡片样式（图片在上方，文字在下方） -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
 </head>
 <body>
   <Navbar />
