@@ -1,0 +1,52 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "Ops:Limone",
+    "songEnName": "Ops_Limone",
+    "songFileName": "Ops_Limone.wav",
+    "artist": "Reku Mochizuki",
+    "artistEnName": "Reku Mochizuki",
+    "album": "Ops:Limone",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260512_185719_6346",
+        "chosenMapName": "Hard",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 137142,
+    "format": "wav",
+    "startOffset": 1724,
+    "bpm": 210000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.33183327317237856,
+        "g": 0.29008349776268008,
+        "b": 0.2780832350254059,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 42552,
+    "bpmConfigs": [
+        {
+            "startOffset": 1724,
+            "BPM1000": 210000
+        }
+    ],
+    "songId": "20260512_185719_6346",
+    "createdAt": "2026-05-12T18:57:19.5152489+08:00",
+    "modifiedTime": 1779819217157,
+    "uploader": "",
+    "mapNames": [
+        "Normal",
+        "Hard"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -562,
+            "BPM1000": 210000
+        }
+    ]
+}

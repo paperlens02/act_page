@@ -1,0 +1,47 @@
+---
+// 玩法介绍部分 - 接收 props：背景色、标题、正文、section ID
+const {
+  background = '#0d1a2e',
+  title = '',
+  text = '',
+  sectionId = '',
+} = Astro.props;
+---
+<section class="gameplay" id={sectionId} style={`background-color: ${background};`}>
+  <div class="gameplay-content">
+    <h2 class="gameplay-title">{title}</h2>
+    <p class="gameplay-text">{text}</p>
+  </div>
+</section>
+
+<style>
+  .gameplay {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+  }
+
+  .gameplay-content {
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .gameplay-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: #00f3ff;
+    margin-bottom: 2rem;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+  }
+
+  .gameplay-text {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.03em;
+  }
+</style>

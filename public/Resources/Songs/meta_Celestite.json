@@ -1,0 +1,51 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "Celestite",
+    "songEnName": "Celestite",
+    "songFileName": "",
+    "artist": "Lasun",
+    "artistEnName": "Lasun",
+    "album": "Celestite",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260617_121641_4659",
+        "chosenMapName": "Hard",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 154090,
+    "format": "",
+    "startOffset": 1364,
+    "bpm": 176000,
+    "coverName": "cover_Celestite",
+    "coverColor": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 58200,
+    "bpmConfigs": [
+        {
+            "startOffset": 1364,
+            "BPM1000": 176000
+        }
+    ],
+    "songId": "20260617_121641_4659",
+    "createdAt": "2026-06-17T12:16:41.7392409+08:00",
+    "modifiedTime": 1781670489046,
+    "uploader": "",
+    "mapNames": [
+        "Hard"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -1363,
+            "BPM1000": 176000
+        }
+    ]
+}

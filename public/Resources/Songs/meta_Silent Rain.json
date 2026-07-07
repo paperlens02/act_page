@@ -1,0 +1,53 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "Silent Rain",
+    "songEnName": "Silent Rain",
+    "songFileName": "Silent Rain.mp3",
+    "artist": "Lasun",
+    "artistEnName": "Lasun",
+    "album": "Silent Rain",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260505134402_3944",
+        "chosenMapName": "Easy",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 154174,
+    "format": "mp3",
+    "startOffset": 1282,
+    "bpm": 190000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.16396372020244599,
+        "g": 0.2614520490169525,
+        "b": 0.4745842516422272,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 21500,
+    "bpmConfigs": [
+        {
+            "startOffset": 1282,
+            "BPM1000": 190000
+        }
+    ],
+    "songId": "20260505134402_3944",
+    "createdAt": "2026-05-02T23:33:30.0760670+08:00",
+    "modifiedTime": 1779891754501,
+    "uploader": "76561198161134311",
+    "mapNames": [
+        "Extreme",
+        "Normal",
+        "Easy"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -1244,
+            "BPM1000": 190000
+        }
+    ]
+}

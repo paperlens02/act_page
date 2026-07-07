@@ -1,0 +1,52 @@
+{
+    "songStatus": 2,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "Arcadian Reverie",
+    "songEnName": "Arcadian Reverie",
+    "songFileName": "Arcadian Reverie.mp3",
+    "artist": "米虾Fomiki",
+    "artistEnName": "MiXia Fomiki",
+    "album": "协奏·鸣尘",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260517_054830_3355",
+        "chosenMapName": "Normal",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 175699,
+    "format": "mp3",
+    "startOffset": 1338,
+    "bpm": 188000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.21154332160949708,
+        "g": 0.31590425968170168,
+        "b": 0.37255245447158816,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 21692,
+    "bpmConfigs": [
+        {
+            "startOffset": 1338,
+            "BPM1000": 188000
+        }
+    ],
+    "songId": "20260517_054830_3355",
+    "createdAt": "2026-05-17T05:35:37.9774131+08:00",
+    "modifiedTime": 1779871411369,
+    "uploader": "",
+    "mapNames": [
+        "Hard",
+        "Normal"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -1215,
+            "BPM1000": 188000
+        }
+    ]
+}

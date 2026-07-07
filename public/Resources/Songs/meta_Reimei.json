@@ -1,0 +1,52 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "Reimei",
+    "songEnName": "Reimei",
+    "songFileName": "Reimei.wav",
+    "artist": "影虎。",
+    "artistEnName": "Kagetora.",
+    "album": "Reimei",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260513_232913_4133",
+        "chosenMapName": "Extreme",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 149837,
+    "format": "wav",
+    "startOffset": 3252,
+    "bpm": 185000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.7012852430343628,
+        "g": 0.08056055009365082,
+        "b": 0.11815424263477326,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 25420,
+    "bpmConfigs": [
+        {
+            "startOffset": 3252,
+            "BPM1000": 185000
+        }
+    ],
+    "songId": "20260513_232913_4133",
+    "createdAt": "2026-05-13T23:29:13.1848272+08:00",
+    "modifiedTime": 1779819223546,
+    "uploader": "",
+    "mapNames": [
+        "Extreme",
+        "Normal"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -640,
+            "BPM1000": 185000
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+---
+import Navbar from '../components/Navbar.astro';
+const { title = 'Act! 细胞调律' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Act! 细胞调律 - 无轨下落式节奏游戏，试玩版现已开放，2027年初发售。" />
+  <title>{title}</title>
+  <link rel="icon" type="image/png" href="/Resources/icon.png" />
+</head>
+<body>
+  <Navbar />
+  <slot />
+</body>
+</html>
+
+<style is:global>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif;
+    background: #0a0a12;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 243, 255, 0.3);
+    border-radius: 3px;
+  }
+</style>

@@ -1,0 +1,53 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "The 89's Momentum",
+    "songEnName": "The 89s Momentum",
+    "songFileName": "The 89s Momentum.wav",
+    "artist": "MYUKKE.",
+    "artistEnName": "MYUKKE.",
+    "album": "The 89's Momentum",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260512_191459_5580",
+        "chosenMapName": "Hard",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 138750,
+    "format": "wav",
+    "startOffset": 1810,
+    "bpm": 128000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.5501067042350769,
+        "g": 0.20853596925735475,
+        "b": 0.1413573920726776,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 61666,
+    "bpmConfigs": [
+        {
+            "startOffset": 1810,
+            "BPM1000": 128000
+        }
+    ],
+    "songId": "20260512_191459_5580",
+    "createdAt": "2026-05-12T19:14:59.6387869+08:00",
+    "modifiedTime": 1779819241352,
+    "uploader": "",
+    "mapNames": [
+        "Normal",
+        "Hard",
+        "Easy"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -65,
+            "BPM1000": 128000
+        }
+    ]
+}

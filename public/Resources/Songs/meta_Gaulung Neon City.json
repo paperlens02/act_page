@@ -1,0 +1,53 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "九龍霓虹街",
+    "songEnName": "Gaulung Neon City",
+    "songFileName": "Gaulung Neon City.wav",
+    "artist": "utzbo",
+    "artistEnName": "utzbo",
+    "album": "九龍霓虹街",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260512_194400_3937",
+        "chosenMapName": "Hard",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 132868,
+    "format": "wav",
+    "startOffset": 3718,
+    "bpm": 190000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.2500072121620178,
+        "g": 0.13361087441444398,
+        "b": 0.5163819193840027,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 44103,
+    "bpmConfigs": [
+        {
+            "startOffset": 3718,
+            "BPM1000": 190000
+        }
+    ],
+    "songId": "20260512_194400_3937",
+    "createdAt": "2026-05-12T19:44:00.9774131+08:00",
+    "modifiedTime": 1779890183334,
+    "uploader": "",
+    "mapNames": [
+        "Extreme",
+        "Hard",
+        "Normal"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -71,
+            "BPM1000": 190000
+        }
+    ]
+}

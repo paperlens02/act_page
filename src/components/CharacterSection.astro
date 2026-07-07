@@ -1,0 +1,164 @@
+---
+// 第二部分：角色介绍 - 双角色展示，渐变淡出立绘 + 主题色描边文字
+// Eiria(右): 亮色 #EED393 / 暗色 #2A2652
+// Rechor(左): 亮色 #BCDE3C / 暗色 #353638
+---
+<section class="characters" id="characters">
+  <div class="characters-inner">
+    <!-- Rechor - 左侧 -->
+    <div class="char-card char-left">
+      <div class="char-text" style="--bright: #BCDE3C; --dark: #353638;">
+        <h2 class="char-name">律可儿 Rechor</h2>
+        <p class="char-desc">
+          测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+        </p>
+      </div>
+      <div class="char-image-wrap">
+        <img
+          src="/Resources/Character_Rechor_1600x1600.png"
+          alt="律可儿 Rechor"
+          class="char-img"
+        />
+      </div>
+    </div>
+
+    <!-- Eiria - 右侧 -->
+    <div class="char-card char-right">
+      <div class="char-image-wrap">
+        <img
+          src="/Resources/Character_Eiria_1600x1600.png"
+          alt="小A Eiria"
+          class="char-img"
+        />
+      </div>
+      <div class="char-text" style="--bright: #EED393; --dark: #2A2652;">
+        <h2 class="char-name">小A Eiria</h2>
+        <p class="char-desc">
+          测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .characters {
+    position: relative;
+    min-height: 100vh;
+    background: url('/Resources/bg_lab.jpg') center center / cover no-repeat;
+    background-color: #0e1e30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 2rem 4rem;
+  }
+
+  .characters-inner {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    gap: 3rem;
+  }
+
+  .char-card {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+
+  /* 左侧卡片：文字在左，立绘在右（人物朝右） */
+  .char-left {
+    flex-direction: row;
+  }
+
+  /* 右侧卡片：立绘在左，文字在右（人物朝左） */
+  .char-right {
+    flex-direction: row;
+  }
+
+  /* 立绘容器 */
+  .char-image-wrap {
+    position: relative;
+    width: 260px;
+    height: 420px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .char-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    /* 渐变淡出 - 上半身清晰，底部柔和融入背景 */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 55%,
+      rgba(0, 0, 0, 0.6) 75%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 55%,
+      rgba(0, 0, 0, 0.6) 75%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  /* 文字区域 */
+  .char-text {
+    flex: 1;
+    padding: 1rem 0;
+  }
+
+  /* 主题色描边文字：一亮一暗 */
+  .char-name {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--bright);
+    /* 描边效果：暗色实色描边 */
+    text-shadow:
+      -2px -2px 0 var(--dark),
+      2px -2px 0 var(--dark),
+      -2px 2px 0 var(--dark),
+      2px 2px 0 var(--dark),
+      0 0 12px var(--dark),
+      0 0 24px var(--dark);
+    margin-bottom: 1rem;
+    letter-spacing: 0.06em;
+  }
+
+  .char-desc {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.8);
+    /* 确保正文可读 */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  /* 移动端适配：竖向堆叠 */
+  @media (max-width: 768px) {
+    .characters-inner {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .char-card {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .char-image-wrap {
+      width: 220px;
+      height: 340px;
+    }
+
+    .char-text {
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,212 @@
+---
+// 第三部分：曲目介绍 - 自动读取 Songs 目录，横向滚动曲目列表
+// 定时切换居中放大，点击也可切换
+import fs from 'node:fs';
+import path from 'node:path';
+
+const songsDir = path.join(process.cwd(), 'public/Resources/Songs');
+const metaFiles = fs.readdirSync(songsDir)
+  .filter(f => f.startsWith('meta_') && f.endsWith('.json'))
+  .sort();
+
+// 从 meta 文件名推导 cover 文件名：meta_X.json → cover_X.png
+const songs = metaFiles.map(f => {
+  const raw = fs.readFileSync(path.join(songsDir, f), 'utf-8');
+  const data = JSON.parse(raw);
+  const songKey = f.slice(5, -5); // 去掉 'meta_' 前缀和 '.json' 后缀
+  return {
+    name: data.songName,
+    artist: data.artist,
+    cover: `/Resources/Songs/cover_${songKey}.png`,
+  };
+});
+---
+<section class="songs" id="songs">
+  <div class="songs-inner">
+    <h2 class="songs-title">曲目</h2>
+    <div class="carousel-container" id="carouselContainer">
+      <div class="carousel-track" id="carouselTrack">
+        {songs.map((song, i) => (
+          <div
+            class:list={['carousel-item', { active: i === 0 }]}
+            data-index={i}
+            data-name={song.name}
+            data-artist={song.artist}
+          >
+            <img src={song.cover} alt={song.name} loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="song-info" id="songInfo">
+      <h3 class="song-name" id="songName">{songs[0]?.name ?? ''}</h3>
+      <p class="song-artist" id="songArtist">{songs[0]?.artist ?? ''}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // 曲目轮播交互逻辑：定时切换 + 点击切换
+  const items = document.querySelectorAll('.carousel-item');
+  const track = document.getElementById('carouselTrack');
+  const container = document.getElementById('carouselContainer');
+  const songNameEl = document.getElementById('songName');
+  const songArtistEl = document.getElementById('songArtist');
+
+  if (items.length > 0 && track && container && songNameEl && songArtistEl) {
+    let currentIndex = 0;
+    let timer = 0;
+
+    function selectSong(index) {
+      currentIndex = index;
+
+      // 更新选中状态
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+
+      // 更新曲目信息
+      const activeItem = items[index];
+      songNameEl.textContent = activeItem.dataset.name || '';
+      songArtistEl.textContent = activeItem.dataset.artist || '';
+
+      // 居中选中项：计算 translateX 偏移
+      const containerWidth = container.offsetWidth;
+      const itemLeft = activeItem.offsetLeft;
+      const itemWidth = activeItem.offsetWidth;
+      const offset = containerWidth / 2 - itemLeft - itemWidth / 2;
+      track.style.transform = 'translateX(' + offset + 'px)';
+    }
+
+    function autoRotate() {
+      currentIndex = (currentIndex + 1) % items.length;
+      selectSong(currentIndex);
+    }
+
+    // 启动自动轮播（4秒间隔）
+    timer = setInterval(autoRotate, 4000);
+
+    // 点击切换：选中并重启定时器
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        clearInterval(timer);
+        selectSong(i);
+        timer = setInterval(autoRotate, 4000);
+      });
+    });
+
+    // 初始选中第一首
+    selectSong(0);
+
+    // 窗口大小变化时重新定位
+    window.addEventListener('resize', () => selectSong(currentIndex));
+  }
+</script>
+
+<style>
+  .songs {
+    position: relative;
+    min-height: 80vh;
+    background: url('/Resources/bg_tunespace.png') center center / cover no-repeat;
+    background-color: #081020;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 2rem 4rem;
+  }
+
+  .songs-inner {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .songs-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    color: #00f3ff;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+  }
+
+  /* 轮播容器 */
+  .carousel-container {
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 2rem;
+    padding: 0 1rem;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  /* 曲目封面项 */
+  .carousel-item {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+    opacity: 0.45;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 选中项：放大 + 高亮 */
+  .carousel-item.active {
+    transform: scale(1.5);
+    opacity: 1;
+    box-shadow: 0 0 24px rgba(0, 243, 255, 0.35), 0 4px 16px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    border: 2px solid rgba(0, 243, 255, 0.5);
+  }
+
+  /* 曲目信息 */
+  .song-info {
+    margin-top: 3rem;
+  }
+
+  .song-name {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 0.4rem;
+  }
+
+  .song-artist {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 600px) {
+    .carousel-item {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+    }
+
+    .carousel-track {
+      gap: 1rem;
+    }
+
+    .carousel-item.active {
+      transform: scale(1.4);
+    }
+  }
+</style>

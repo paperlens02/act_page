@@ -1,0 +1,53 @@
+{
+    "songStatus": 3,
+    "isFromNet": false,
+    "isOfficial": true,
+    "songName": "The Formula",
+    "songEnName": "The Formula",
+    "songFileName": "formula.wav",
+    "artist": "Junk",
+    "artistEnName": "Junk",
+    "album": "Forget a Scenery",
+    "albumEnName": "",
+    "eventPath": "event:/Music_CUSTOMUGC",
+    "archive": {
+        "songId": "20260512_225458_1559",
+        "chosenMapName": "Extreme",
+        "lastPlayedTime": 0.0
+    },
+    "songLength": 143246,
+    "format": "wav",
+    "startOffset": 1000,
+    "bpm": 144000,
+    "coverName": "cover.png",
+    "coverColor": {
+        "r": 0.24643978476524354,
+        "g": 0.29485946893692019,
+        "b": 0.35870081186294558,
+        "a": 1.0
+    },
+    "genre": "",
+    "tags": [],
+    "previewStartOffset": 40781,
+    "bpmConfigs": [
+        {
+            "startOffset": 1000,
+            "BPM1000": 144000
+        }
+    ],
+    "songId": "20260512_225458_1559",
+    "createdAt": "2026-05-12T22:54:58.9611369+08:00",
+    "modifiedTime": 1782978675836,
+    "uploader": "",
+    "mapNames": [
+        "Extreme",
+        "Hard",
+        "Normal"
+    ],
+    "normalizedBpmConfigs": [
+        {
+            "startOffset": -667,
+            "BPM1000": 144000
+        }
+    ]
+}
