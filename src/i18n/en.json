@@ -1,0 +1,38 @@
+﻿{
+  "nav": {
+    "home": "Home"
+  },
+  "hero": {
+    "tagline": "Tune the world with melody",
+    "release": "Coming early 2027",
+    "demo": "Demo now available",
+    "steam": "Steam Demo",
+    "afdian": "Afdian",
+    "qq": "QQ Group",
+    "bilibili": "Bilibili",
+    "discord": "Discord"
+  },
+  "character": {
+    "rechor": {
+      "name": "Rechor",
+      "desc": "A maintenance robot of unknown origin, always tending to the lab in the Inner World. Clumsy yet somehow always gets the job done. Tiny displays on her chest and waist flicker with cryptic messages. She seems to possess emotions beyond mere politeness... though she hasn't realized it yet."
+    },
+    "eiria": {
+      "name": "Eiria",
+      "desc": "A free-spirited girl full of energy, her real name is Eiria. While fleeing persecution in the Outer World, she stumbled into the Inner World and discovered her father's abandoned lab. Wielding a family heirloom staff, she resolved to carry out the 'Cell Tuning Project' — infusing spirituality into humanity's subconscious. Rebellious yet resolute, with occasional glimpses of a refined lady."
+    }
+  },
+  "song": {
+    "title": "Tracks"
+  },
+  "gameplay": {
+    "tune": {
+      "title": "Tune Mode",
+      "desc": "Innovative laneless rhythm game: any key triggers a judgment, play comfortably even lying down.<br>Note affinity: Red for jacks, Green for flows, Blue for tech — forming key strategies.<br>Multi-dimensional scoring: affinity inputs don't affect technical score, only earn art points.<br>Accumulate art points to unlock story and collectibles."
+    },
+    "fight": {
+      "title": "Fight Mode",
+      "desc": "A brand-new combat rhythm experience: battle enemies to the melody.<br>Three skill types: Beat for heavy strikes, Flow for rapid combos, Tech for artful techniques.<br>Charge & finish: build energy and unleash a finishing move for a one-hit KO.<br>Hero versus monsters — an intense battle of offense and defense, unfolding in rhythm."
+    }
+  }
+}

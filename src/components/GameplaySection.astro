@@ -1,22 +1,23 @@
----
+﻿---
 // 玩法介绍部分 - 接收 props：背景色、标题、正文、section ID
 const {
   background = '#0d1a2e',
   title = '',
   text = '',
   sectionId = '',
+  titleI18n = '',
+  textI18n = '',
 } = Astro.props;
 ---
-<section class="gameplay" id={sectionId} style={`background-color: ${background};`}>
+<section class="gameplay snap-section" id={sectionId} style={`background-color: ${background};`}>
   <div class="gameplay-content">
-    <h2 class="gameplay-title">{title}</h2>
-    <p class="gameplay-text">{text}</p>
+    <h2 class="gameplay-title" data-i18n={titleI18n}>{title}</h2>
+    <p class="gameplay-text" data-i18n-html={textI18n}>{text}</p>
   </div>
 </section>
 
 <style>
   .gameplay {
-    min-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;

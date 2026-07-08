@@ -1,60 +1,41 @@
----
+﻿---
 import Navbar from '../components/Navbar.astro';
-// 页面标题，Bing/Google 建议长度 15~60 个字符
+import zh from '../i18n/zh.json';
+import en from '../i18n/en.json';
+import ja from '../i18n/ja.json';
+
 const { title = 'Act! 细胞调律 官方网站 | Steam试玩版已开放' } = Astro.props;
 
-// 网站基础信息，集中管理方便维护
 const siteUrl = 'https://paperactgames.com';
 const description = '创新无轨音游《Act! 细胞调律》Steam免费试玩开放中！完全自由的输入策略，轻松沉浸的手柄体验；严选优质曲目，并内置自定义编辑器；明快而深邃的碎片式剧情、充满神秘的收集养成——立即前往Steam免费下载！';
-const ogImage = '/Resources/KV1080P.png';  // 社交分享时的预览图，用 KV 大图最有视觉冲击力
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;  // 当前页面的标准地址
+const ogImage = '/Resources/KV1080P.png';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const translations = { zh, en, ja };
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-lang="zh">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- === 基础 SEO === -->
-  <!-- description：搜索引擎结果中显示的页面摘要文字，建议 70~160 字 -->
   <meta name="description" content={description} />
-  <!-- keywords：关键词标签，现在 Google 已不再使用，但百度等部分引擎仍参考 -->
   <meta name="keywords" content="Act,细胞调律,音游,节奏游戏,独立游戏,试玩版,Steam,paperactgames" />
-  <!-- author：作者信息 -->
   <meta name="author" content="PaperAct / 纸张lens" />
   <title>{title}</title>
 
-  <!-- === canonical 标签 === -->
-  <!-- 告诉搜索引擎"这个页面的标准地址是什么"，防止重复收录 -->
-  <!-- 比如别人从 /index.html 和 / 两个地址访问同一页面，canonical 统一指向 / -->
   <link rel="canonical" href={canonicalUrl} />
-
-  <!-- === 网页图标 === -->
   <link rel="icon" type="image/png" href="/Resources/icon.png" />
 
-  <!-- === Open Graph 标签（社交分享预览卡） === -->
-  <!-- 当有人在 QQ、微信、Discord、Twitter 分享你的链接时， -->
-  <!-- 会显示一个带图片+标题+描述的预览卡片，就是靠这些标签控制的。 -->
-  <!-- og:type=website 表示这是一个网站类型的内容 -->
   <meta property="og:type" content="website" />
-  <!-- og:site_name：网站名称，显示在预览卡顶部 -->
   <meta property="og:site_name" content="Act! 细胞调律" />
-  <!-- og:title：分享时显示的标题 -->
   <meta property="og:title" content={title} />
-  <!-- og:description：分享时显示的描述文字 -->
   <meta property="og:description" content={description} />
-  <!-- og:url：页面的规范地址 -->
   <meta property="og:url" content={canonicalUrl} />
-  <!-- og:image：分享时显示的预览图，建议尺寸 1200×630px -->
-  <!-- 这里用绝对路径拼接完整 URL，因为社交平台需要完整地址才能抓到图片 -->
   <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
-  <!-- og:locale：内容语言，zh_CN 表示简体中文 -->
   <meta property="og:locale" content="zh_CN" />
 
-  <!-- === Twitter Card 标签 === -->
-  <!-- 专门给 Twitter/X 用的分享预览格式，和 Open Graph 类似但独立配置。 -->
-  <!-- summary_large_image：大图卡片样式（图片在上方，文字在下方） -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
@@ -63,6 +44,49 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;  // 当前页面
 <body>
   <Navbar />
   <slot />
+
+  <script define:vars={{ translations }}>
+    const i18nData = translations;
+    let currentLang = localStorage.getItem('lang') || 'zh';
+
+    function applyLang(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : lang);
+      
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const value = getNestedValue(i18nData[lang], key);
+        if (value !== undefined) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = value;
+          } else {
+            el.textContent = value;
+          }
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        const value = getNestedValue(i18nData[lang], key);
+        if (value !== undefined) {
+          el.innerHTML = value;
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+
+    function getNestedValue(obj, path) {
+      return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => applyLang(currentLang));
+    window.addEventListener('langChange', (e) => applyLang(e.detail.lang));
+  </script>
 </body>
 </html>
 
@@ -74,6 +98,8 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;  // 当前页面
   }
   html {
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
   }
   html, body {
     height: 100%;
@@ -91,5 +117,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;  // 当前页面
   ::-webkit-scrollbar-thumb {
     background: rgba(0, 243, 255, 0.3);
     border-radius: 3px;
+  }
+  .snap-section {
+    min-height: 100vh;
+    scroll-snap-align: start;
   }
 </style>

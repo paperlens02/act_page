@@ -1,42 +1,43 @@
+﻿---
+// 第二部分：角色介绍 - 双角色展示，半身立绘靠边站，文字居中错开
 ---
-// 第二部分：角色介绍 - 双角色展示，渐变淡出立绘 + 主题色描边文字
-// Eiria(右): 亮色 #EED393 / 暗色 #2A2652
-// Rechor(左): 亮色 #BCDE3C / 暗色 #353638
----
-<section class="characters" id="characters">
+<section class="characters snap-section" id="characters">
   <div class="characters-inner">
-    <!-- Rechor - 左侧 -->
-    <div class="char-card char-left">
-      <div class="char-text" style="--bright: #BCDE3C; --dark: #353638;">
-        <h2 class="char-name">律可儿 Rechor</h2>
-        <p class="char-desc">
-          测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+    <!-- Rechor - 左侧立绘 -->
+    <div class="char-portrait char-left">
+      <img
+        src="/Resources/Character_Rechor_1600x1600.png"
+        alt="律可儿 Rechor"
+        class="char-img"
+      />
+    </div>
+
+    <!-- 中间文字区域 -->
+    <div class="char-text-area">
+      <!-- Rechor 文字 - 偏上 -->
+      <div class="char-text char-text-top" style="--bright: #BCDE3C; --dark: #353638;">
+        <h2 class="char-name" data-i18n="character.rechor.name">律可儿 Rechor</h2>
+        <p class="char-desc" data-i18n="character.rechor.desc">
+          来源不明的维修机器人，一直在里世界的实验室中负责日常维护。看似笨拙却总能交出能用的设备。胸口和腰间的微型显示屏时常闪烁着未知讯息。她似乎拥有超越礼貌的情感……但自己还没有意识到。
         </p>
       </div>
-      <div class="char-image-wrap">
-        <img
-          src="/Resources/Character_Rechor_1600x1600.png"
-          alt="律可儿 Rechor"
-          class="char-img"
-        />
+
+      <!-- Eiria 文字 - 偏下 -->
+      <div class="char-text char-text-bottom" style="--bright: #EED393; --dark: #2A2652;">
+        <h2 class="char-name" data-i18n="character.eiria.name">小A Eiria</h2>
+        <p class="char-desc" data-i18n="character.eiria.desc">
+          大大咧咧的活力少女，真名 Eiria。在表世界遭到追杀时意外坠入里世界，发现了父亲留下的实验室。手持传家法杖，决心实施"细胞调律计划"，为人类的潜意识注入灵性。叛逆而坚毅，偶尔流露出大小姐气质。
+        </p>
       </div>
     </div>
 
-    <!-- Eiria - 右侧 -->
-    <div class="char-card char-right">
-      <div class="char-image-wrap">
-        <img
-          src="/Resources/Character_Eiria_1600x1600.png"
-          alt="小A Eiria"
-          class="char-img"
-        />
-      </div>
-      <div class="char-text" style="--bright: #EED393; --dark: #2A2652;">
-        <h2 class="char-name">小A Eiria</h2>
-        <p class="char-desc">
-          测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-        </p>
-      </div>
+    <!-- Eiria - 右侧立绘 -->
+    <div class="char-portrait char-right">
+      <img
+        src="/Resources/Character_Eiria_1600x1600.png"
+        alt="小A Eiria"
+        class="char-img"
+      />
     </div>
   </div>
 </section>
@@ -44,83 +45,93 @@
 <style>
   .characters {
     position: relative;
-    min-height: 100vh;
     background: url('/Resources/bg_lab.jpg') center center / cover no-repeat;
     background-color: #0e1e30;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 80px 2rem 4rem;
+    padding: 80px 0 4rem;
   }
 
   .characters-inner {
-    max-width: 1100px;
     width: 100%;
+    max-width: 1400px;
     display: flex;
-    gap: 3rem;
+    align-items: stretch;
+    position: relative;
   }
 
-  .char-card {
-    flex: 1;
+  /* 立绘容器 - 靠边站 */
+  .char-portrait {
+    position: relative;
+    width: 25vw;
+    max-width: 350px;
+    min-width: 200px;
+    flex-shrink: 0;
     display: flex;
     align-items: flex-end;
-    gap: 1.5rem;
+    justify-content: center;
   }
 
-  /* 左侧卡片：文字在左，立绘在右（人物朝右） */
   .char-left {
-    flex-direction: row;
+    justify-content: flex-start;
   }
 
-  /* 右侧卡片：立绘在左，文字在右（人物朝左） */
   .char-right {
-    flex-direction: row;
-  }
-
-  /* 立绘容器 */
-  .char-image-wrap {
-    position: relative;
-    width: 260px;
-    height: 420px;
-    flex-shrink: 0;
-    overflow: hidden;
-    border-radius: 16px;
+    justify-content: flex-end;
   }
 
   .char-img {
     width: 100%;
-    height: 100%;
+    height: 80vh;
     object-fit: cover;
     object-position: top center;
     /* 渐变淡出 - 上半身清晰，底部柔和融入背景 */
     -webkit-mask-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 55%,
-      rgba(0, 0, 0, 0.6) 75%,
+      rgba(0, 0, 0, 1) 60%,
+      rgba(0, 0, 0, 0.5) 80%,
       rgba(0, 0, 0, 0) 100%
     );
     mask-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 55%,
-      rgba(0, 0, 0, 0.6) 75%,
+      rgba(0, 0, 0, 1) 60%,
+      rgba(0, 0, 0, 0.5) 80%,
       rgba(0, 0, 0, 0) 100%
     );
   }
 
-  /* 文字区域 */
-  .char-text {
+  /* 中间文字区域 */
+  .char-text-area {
     flex: 1;
-    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 3rem;
+    gap: 3rem;
   }
 
-  /* 主题色描边文字：一亮一暗 */
+  .char-text {
+    max-width: 400px;
+  }
+
+  .char-text-top {
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .char-text-bottom {
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  /* 主题色描边文字 */
   .char-name {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
     color: var(--bright);
-    /* 描边效果：暗色实色描边 */
     text-shadow:
       -2px -2px 0 var(--dark),
       2px -2px 0 var(--dark),
@@ -136,7 +147,6 @@
     font-size: clamp(0.9rem, 1.5vw, 1.05rem);
     line-height: 1.9;
     color: rgba(255, 255, 255, 0.8);
-    /* 确保正文可读 */
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
   }
 
@@ -144,21 +154,33 @@
   @media (max-width: 768px) {
     .characters-inner {
       flex-direction: column;
-      gap: 2rem;
-    }
-
-    .char-card {
-      flex-direction: column;
       align-items: center;
     }
 
-    .char-image-wrap {
-      width: 220px;
-      height: 340px;
+    .char-portrait {
+      width: 200px;
+      min-width: unset;
+    }
+
+    .char-img {
+      height: 300px;
+    }
+
+    .char-text-area {
+      padding: 1rem 2rem;
+      gap: 2rem;
     }
 
     .char-text {
+      max-width: 100%;
       text-align: center;
+      align-self: center;
+    }
+
+    .char-text-top,
+    .char-text-bottom {
+      text-align: center;
+      align-self: center;
     }
   }
 </style>

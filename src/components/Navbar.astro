@@ -1,14 +1,28 @@
----
-// 顶端导航栏 - 目前只有"主页"链接，后续可扩展
+﻿---
+// 顶端导航栏 - 主页链接 + 语言切换
 ---
 <nav class="navbar" id="navbar">
   <div class="navbar-content">
     <a href="/" class="navbar-brand">Act!</a>
     <div class="navbar-links">
-      <a href="#hero" class="navbar-link">主页</a>
+      <a href="#hero" class="navbar-link" data-i18n="nav.home">主页</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
     </div>
   </div>
 </nav>
+
+<script>
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      window.dispatchEvent(new CustomEvent('langChange', { detail: { lang } }));
+    });
+  });
+</script>
 
 <style>
   .navbar {
@@ -44,6 +58,7 @@
 
   .navbar-links {
     display: flex;
+    align-items: center;
     gap: 2rem;
   }
 
@@ -57,6 +72,35 @@
   }
 
   .navbar-link:hover {
+    color: #00f3ff;
+  }
+
+  .lang-switcher {
+    display: flex;
+    gap: 0.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    padding: 2px;
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .lang-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .lang-btn.active {
+    background: rgba(0, 243, 255, 0.15);
     color: #00f3ff;
   }
 </style>

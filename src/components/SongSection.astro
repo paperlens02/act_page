@@ -1,6 +1,5 @@
----
+﻿---
 // 第三部分：曲目介绍 - 自动读取 Songs 目录，横向滚动曲目列表
-// 定时切换居中放大，点击也可切换
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -9,11 +8,10 @@ const metaFiles = fs.readdirSync(songsDir)
   .filter(f => f.startsWith('meta_') && f.endsWith('.json'))
   .sort();
 
-// 从 meta 文件名推导 cover 文件名：meta_X.json → cover_X.png
 const songs = metaFiles.map(f => {
   const raw = fs.readFileSync(path.join(songsDir, f), 'utf-8');
   const data = JSON.parse(raw);
-  const songKey = f.slice(5, -5); // 去掉 'meta_' 前缀和 '.json' 后缀
+  const songKey = f.slice(5, -5);
   return {
     name: data.songName,
     artist: data.artist,
@@ -21,22 +19,30 @@ const songs = metaFiles.map(f => {
   };
 });
 ---
-<section class="songs" id="songs">
+<section class="songs snap-section" id="songs">
   <div class="songs-inner">
-    <h2 class="songs-title">曲目</h2>
-    <div class="carousel-container" id="carouselContainer">
-      <div class="carousel-track" id="carouselTrack">
-        {songs.map((song, i) => (
-          <div
-            class:list={['carousel-item', { active: i === 0 }]}
-            data-index={i}
-            data-name={song.name}
-            data-artist={song.artist}
-          >
-            <img src={song.cover} alt={song.name} loading="lazy" />
-          </div>
-        ))}
+    <h2 class="songs-title" data-i18n="song.title">曲目</h2>
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow carousel-arrow-left" id="arrowLeft" aria-label="Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="carousel-container" id="carouselContainer">
+        <div class="carousel-track" id="carouselTrack">
+          {songs.map((song, i) => (
+            <div
+              class:list={['carousel-item', { active: i === 0 }]}
+              data-index={i}
+              data-name={song.name}
+              data-artist={song.artist}
+            >
+              <img src={song.cover} alt={song.name} loading="lazy" draggable="false" />
+            </div>
+          ))}
+        </div>
       </div>
+      <button class="carousel-arrow carousel-arrow-right" id="arrowRight" aria-label="Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
     <div class="song-info" id="songInfo">
       <h3 class="song-name" id="songName">{songs[0]?.name ?? ''}</h3>
@@ -46,36 +52,43 @@ const songs = metaFiles.map(f => {
 </section>
 
 <script>
-  // 曲目轮播交互逻辑：定时切换 + 点击切换
   const items = document.querySelectorAll('.carousel-item');
   const track = document.getElementById('carouselTrack');
   const container = document.getElementById('carouselContainer');
   const songNameEl = document.getElementById('songName');
   const songArtistEl = document.getElementById('songArtist');
+  const arrowLeft = document.getElementById('arrowLeft');
+  const arrowRight = document.getElementById('arrowRight');
 
   if (items.length > 0 && track && container && songNameEl && songArtistEl) {
     let currentIndex = 0;
     let timer = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startTranslate = 0;
+    let currentTranslate = 0;
+
+    function getTranslateX() {
+      const style = window.getComputedStyle(track);
+      const matrix = new DOMMatrix(style.transform);
+      return matrix.m41;
+    }
 
     function selectSong(index) {
       currentIndex = index;
-
-      // 更新选中状态
       items.forEach((item, i) => {
         item.classList.toggle('active', i === index);
       });
-
-      // 更新曲目信息
       const activeItem = items[index];
       songNameEl.textContent = activeItem.dataset.name || '';
       songArtistEl.textContent = activeItem.dataset.artist || '';
-
-      // 居中选中项：计算 translateX 偏移
       const containerWidth = container.offsetWidth;
       const itemLeft = activeItem.offsetLeft;
       const itemWidth = activeItem.offsetWidth;
       const offset = containerWidth / 2 - itemLeft - itemWidth / 2;
+      track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       track.style.transform = 'translateX(' + offset + 'px)';
+      currentTranslate = offset;
     }
 
     function autoRotate() {
@@ -83,22 +96,108 @@ const songs = metaFiles.map(f => {
       selectSong(currentIndex);
     }
 
-    // 启动自动轮播（4秒间隔）
+    function prevSong() {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      selectSong(currentIndex);
+    }
+
+    function nextSong() {
+      currentIndex = (currentIndex + 1) % items.length;
+      selectSong(currentIndex);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(autoRotate, 4000);
+    }
+
     timer = setInterval(autoRotate, 4000);
 
-    // 点击切换：选中并重启定时器
+    // Arrow buttons
+    if (arrowLeft) arrowLeft.addEventListener('click', () => { resetTimer(); prevSong(); });
+    if (arrowRight) arrowRight.addEventListener('click', () => { resetTimer(); nextSong(); });
+
+    // Click to select
     items.forEach((item, i) => {
       item.addEventListener('click', () => {
-        clearInterval(timer);
+        resetTimer();
         selectSong(i);
-        timer = setInterval(autoRotate, 4000);
       });
     });
 
-    // 初始选中第一首
-    selectSong(0);
+    // Mouse drag
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      startTranslate = getTranslateX();
+      track.style.transition = 'none';
+      container.style.cursor = 'grabbing';
+      resetTimer();
+    });
 
-    // 窗口大小变化时重新定位
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      currentTranslate = startTranslate + dx;
+      track.style.transform = 'translateX(' + currentTranslate + 'px)';
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      container.style.cursor = '';
+      track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+      // Find nearest item
+      const containerCenter = container.offsetWidth / 2;
+      let nearestIndex = 0;
+      let nearestDist = Infinity;
+      items.forEach((item, i) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2 + currentTranslate;
+        const dist = Math.abs(itemCenter - containerCenter);
+        if (dist < nearestDist) {
+          nearestDist = dist;
+          nearestIndex = i;
+        }
+      });
+      selectSong(nearestIndex);
+    });
+
+    // Touch drag
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startTranslate = getTranslateX();
+      track.style.transition = 'none';
+      resetTimer();
+    });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const dx = e.touches[0].clientX - startX;
+      currentTranslate = startTranslate + dx;
+      track.style.transform = 'translateX(' + currentTranslate + 'px)';
+    });
+
+    container.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      const containerCenter = container.offsetWidth / 2;
+      let nearestIndex = 0;
+      let nearestDist = Infinity;
+      items.forEach((item, i) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2 + currentTranslate;
+        const dist = Math.abs(itemCenter - containerCenter);
+        if (dist < nearestDist) {
+          nearestDist = dist;
+          nearestIndex = i;
+        }
+      });
+      selectSong(nearestIndex);
+    });
+
+    selectSong(0);
     window.addEventListener('resize', () => selectSong(currentIndex));
   }
 </script>
@@ -106,7 +205,6 @@ const songs = metaFiles.map(f => {
 <style>
   .songs {
     position: relative;
-    min-height: 80vh;
     background: url('/Resources/bg_tunespace.png') center center / cover no-repeat;
     background-color: #081020;
     display: flex;
@@ -130,11 +228,44 @@ const songs = metaFiles.map(f => {
     text-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
   }
 
-  /* 轮播容器 */
+  /* Carousel wrapper with arrows */
+  .carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .carousel-arrow {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    background: rgba(0, 243, 255, 0.08);
+    color: #00f3ff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    z-index: 3;
+  }
+
+  .carousel-arrow:hover {
+    background: rgba(0, 243, 255, 0.2);
+    border-color: #00f3ff;
+    transform: scale(1.1);
+  }
+
   .carousel-container {
+    flex: 1;
     overflow: hidden;
     position: relative;
     padding: 2rem 0;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .carousel-track {
@@ -145,7 +276,6 @@ const songs = metaFiles.map(f => {
     will-change: transform;
   }
 
-  /* 曲目封面项 */
   .carousel-item {
     flex-shrink: 0;
     width: 120px;
@@ -156,6 +286,8 @@ const songs = metaFiles.map(f => {
     transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
     opacity: 0.45;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .carousel-item img {
@@ -163,9 +295,11 @@ const songs = metaFiles.map(f => {
     height: 100%;
     object-fit: cover;
     display: block;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
-  /* 选中项：放大 + 高亮 */
   .carousel-item.active {
     transform: scale(1.5);
     opacity: 1;
@@ -174,7 +308,6 @@ const songs = metaFiles.map(f => {
     border: 2px solid rgba(0, 243, 255, 0.5);
   }
 
-  /* 曲目信息 */
   .song-info {
     margin-top: 3rem;
   }
@@ -193,20 +326,21 @@ const songs = metaFiles.map(f => {
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   }
 
-  /* 移动端适配 */
   @media (max-width: 600px) {
     .carousel-item {
       width: 90px;
       height: 90px;
       border-radius: 10px;
     }
-
     .carousel-track {
       gap: 1rem;
     }
-
     .carousel-item.active {
       transform: scale(1.4);
+    }
+    .carousel-arrow {
+      width: 36px;
+      height: 36px;
     }
   }
 </style>

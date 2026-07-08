@@ -1,11 +1,10 @@
----
+﻿---
 // 首页：组装所有区域组件
 import Layout from '../layouts/Layout.astro';
 import HeroSection from '../components/HeroSection.astro';
 import CharacterSection from '../components/CharacterSection.astro';
 import SongSection from '../components/SongSection.astro';
 import GameplaySection from '../components/GameplaySection.astro';
-import CommunitySection from '../components/CommunitySection.astro';
 ---
 <Layout title="Act! 细胞调律 官方网站 | Steam试玩版已开放">
   <HeroSection />
@@ -13,15 +12,18 @@ import CommunitySection from '../components/CommunitySection.astro';
   <SongSection />
   <GameplaySection
     background="#0d1a2e"
-    title="调律系统"
-    text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试"
-    sectionId="gameplay1"
+    title="Tune玩法"
+    text="创新无轨音游：任何按键均可触发判定，躺着也能打音游。<br>音符关联性：红色连打、绿色阶梯、蓝色交互，形成按键策略。<br>多维评分：关联性输入不影响技术分，仅获得艺术分奖励。<br>积累艺术分，推进剧情，兑换收集品。"
+    sectionId="tune"
+    titleI18n="gameplay.tune.title"
+    textI18n="gameplay.tune.desc"
   />
   <GameplaySection
     background="#1a0828"
-    title="战斗系统"
-    text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试"
-    sectionId="gameplay2"
+    title="Fight玩法"
+    text="全新战斗节奏玩法：在旋律中迎战敌人。<br>三色技能：Beat 重击、Flow 连斩、Tech 巧技，对应不同攻击风格。<br>蓄力与终结：积攒能量释放终结技，一击制敌。<br>英雄与怪物的攻防博弈，在节奏中展开热血战斗。"
+    sectionId="fight"
+    titleI18n="gameplay.fight.title"
+    textI18n="gameplay.fight.desc"
   />
-  <CommunitySection />
 </Layout>
