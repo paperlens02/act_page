@@ -11,7 +11,7 @@ const xUrl = 'https://x.com/paperlens1';
   <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
   <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
   <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
-  <p class="hero-subtitle btn-reveal" style="animation-delay: 0.4s" data-i18n="hero.subtitle">自由输入，手柄躺玩！全新音游玩法将于2027年初正式登场！</p>
+  <p class="hero-subtitle"><span class="btn-reveal" style="animation-delay: 0.4s" data-i18n="hero.subtitle">自由输入，手柄躺玩！全新音游玩法将于2027年初正式登场！</span></p>
   <div class="bottom-buttons">
     <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian btn-reveal" style="animation-delay: 0.15s">
       <img src="/Resources/logo_afdian.png" alt="" class="btn-icon" />
@@ -120,6 +120,8 @@ const xUrl = 'https://x.com/paperlens1';
       0 0 6px rgba(120, 220, 255, 0.75),
       0 0 14px rgba(80, 180, 255, 0.4),
       0 2px 8px rgba(0, 0, 0, 0.6);
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
     margin: 0;
     line-height: 1.5;
@@ -286,6 +288,68 @@ const xUrl = 'https://x.com/paperlens1';
       font-size: 0.8rem;
       bottom: 30%;
       max-width: 85%;
+    }
+  }
+
+  /* ===== 手机竖屏适配 ===== */
+  @media (max-width: 768px) and (orientation: portrait) {
+    /* 背景：cover 铺满，避免 120% 按宽算时顶部/底部留黑 */
+    .hero {
+      background-size: cover;
+      background-position: center center;
+      padding: 0;
+    }
+
+    /* Logo：改为宽度驱动（避免 height 25% 在竖屏下拉长挤压），居中于视口偏上 */
+    .hero .logo {
+      top: 28%;
+      bottom: auto;
+      width: 52%;
+      max-width: 75%;
+      height: auto;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Subtitle：紧贴 logo 下方（top 驱动，避开 bottom% 在竖屏下的重叠问题） */
+    .hero .hero-subtitle {
+      top: 54%;
+      bottom: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 82%;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    /* 按钮组：贴底，缩小内边距 */
+    .hero .bottom-buttons {
+      bottom: 4%;
+      gap: 0.5rem;
+      padding: 0 5%;
+    }
+    .hero .btn {
+      min-width: 180px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.88rem;
+    }
+    .hero .btn-icon {
+      width: 28px;
+      height: 28px;
+    }
+    .hero .btn-small {
+      min-width: 64px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.7rem;
+    }
+    .hero .btn-group {
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    /* 底部渐变缩短，避免吃掉过多按钮空间 */
+    .hero::after {
+      height: 110px;
     }
   }
 
