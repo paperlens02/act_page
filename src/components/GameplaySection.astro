@@ -8,9 +8,13 @@ const {
   sectionId = '',
   titleI18n = '',
   textI18n = '',
+  nextBg = '',
 } = Astro.props;
 ---
-<section class="gameplay snap-section" id={sectionId} style={`background-color: ${background};${backgroundImage ? " background-image: url('" + backgroundImage + "'); background-size: cover; background-position: center; background-repeat: no-repeat;" : ""}`}>
+<section
+  class:list={['gameplay', 'snap-section', { 'has-next-divider': !!nextBg }]}
+  id={sectionId}
+  style={`background-color: ${background};${backgroundImage ? " background-image: url('" + backgroundImage + "'); background-size: cover; background-position: center; background-repeat: no-repeat;" : ""}${nextBg ? " --next-bg: " + nextBg + ";" : ""}`}>
   <div class="gameplay-content">
     <h2 class="gameplay-title" data-i18n={titleI18n}>{title}</h2>
     <p class="gameplay-text" data-i18n-html={textI18n}>{text}</p>
@@ -22,7 +26,8 @@ const {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5rem 2rem;
+    padding: 5rem 2rem 10rem;
+    position: relative;
   }
 
   .gameplay-content {
@@ -45,5 +50,18 @@ const {
     line-height: 2;
     color: rgba(255, 255, 255, 0.75);
     letter-spacing: 0.03em;
+  }
+
+  /* 玩法 section 之间的过渡渐变 */
+  .gameplay.has-next-divider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent 0%, var(--next-bg, rgba(26, 8, 40, 1)) 100%);
+    z-index: 2;
+    pointer-events: none;
   }
 </style>

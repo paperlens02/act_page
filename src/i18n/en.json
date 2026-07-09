@@ -3,9 +3,7 @@
     "home": "Home"
   },
   "hero": {
-    "subtitle": "Free-Input Rhythm Game",
-    "tagline": "Demo Now Available!",
-    "release": "Coming early 2027",
+    "subtitle": "Free-Input Rhythm Game — Play with a Controller from Your Couch! A Brand-New Rhythm Experience Arrives Early 2027!",
     "steam": "Download Demo",
     "afdian": "Support me on Afdian",
     "qq": "QQ Group",
@@ -16,15 +14,15 @@
   "character": {
     "rechor": {
       "name": "Rechor",
-      "desc": "A maintenance robot of unknown origin, always tending to the lab in the Inner World. Clumsy yet somehow always gets the job done. Tiny displays on her chest and waist flicker with cryptic messages. She seems to possess emotions beyond mere politeness... though she hasn't realized it yet."
+      "desc": "A maintenance robot of unknown origin, tirelessly tending to equipment and tidying rooms... always fumbling into clumsy little accidents, yet seemingly built sturdy enough to never really get hurt. Polite and gentle in manner, but now and then her expression slips into something harder to read — as if she were hiding some extraordinary secret."
     },
     "eiria": {
       "name": "Eiria",
-      "desc": "A free-spirited girl full of energy, her real name is Eiria. While fleeing persecution in the Outer World, she stumbled into the Inner World and discovered her father's abandoned lab. Wielding a family heirloom staff, she resolved to carry out the Cell Tuning Project. Rebellious yet resolute, with occasional glimpses of a refined lady."
+      "desc": "A carefree, energetic girl who seems to come from somewhere unusual — could she actually be a young lady of high birth? She's utterly determined to push forward the Tuning Project, though it often looks more like she's just bossing people around. Her obsession with games and snacks is worrying; the lonely look that slips through now and then makes it hard to look away."
     }
   },
   "song": {
-    "title": "Tracks"
+    "title": "Hand-Picked Quality Tracks"
   },
   "community": {
     "title": "Join Our Community",
@@ -37,12 +35,12 @@
   },
   "gameplay": {
     "tune": {
-      "title": "Tune Mode",
-      "desc": "Innovative laneless rhythm game: any key triggers a judgment, play comfortably even lying down.<br>Note affinity: Red for jacks, Green for flows, Blue for tech.<br>Multi-dimensional scoring: affinity inputs only earn art points.<br>Accumulate art points to unlock story and collectibles."
+      "title": "TUNE - Tuning Mode",
+      "desc": "A complete reinvention of traditional rhythm games!<br>No fixed keys — only free expression:<br>Under the rules of \"Note Affinity\", play the melody your way, with the fingering you love most."
     },
     "fight": {
-      "title": "Fight Mode",
-      "desc": "A brand-new combat rhythm experience: battle enemies to the melody.<br>Three skill types: Beat, Flow, Tech for different attack styles.<br>Charge and finish: build energy and unleash a finishing move.<br>Hero versus monsters, an intense battle unfolding in rhythm."
+      "title": "Fight - Battle Mode",
+      "desc": "Battle to the melody — against formidable foes, or perhaps old friends.<br>Attack, defend, unleash your Finishing Move — everything flows to the music.<br>Ride the rhythm, duel with conviction, and fight to save the world!"
     }
   }
 }

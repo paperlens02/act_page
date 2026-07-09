@@ -11,16 +11,20 @@ const xUrl = 'https://x.com/paperlens1';
   <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
   <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
   <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
+  <p class="hero-subtitle btn-reveal" style="animation-delay: 0.4s" data-i18n="hero.subtitle">自由输入，手柄躺玩！全新音游玩法将于2027年初正式登场！</p>
   <div class="bottom-buttons">
-    <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian">
+    <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian btn-reveal" style="animation-delay: 0.15s">
       <img src="/Resources/logo_afdian.png" alt="" class="btn-icon" />
       <span data-i18n="hero.afdian">在爱发电支持我！</span>
     </a>
-    <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam btn-center">
-      <img src="/Resources/logo_steam.png" alt="" class="btn-icon" />
-      <span data-i18n="hero.steam">下载试玩版</span>
-    </a>
-    <div class="btn-group btn-group-left">
+    <div class="btn-steam-wrap btn-reveal" style="animation-delay: 0s">
+      <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam btn-center">
+        <span class="btn-sweep"></span>
+        <img src="/Resources/logo_steam.png" alt="" class="btn-icon" />
+        <span data-i18n="hero.steam">下载试玩版</span>
+      </a>
+    </div>
+    <div class="btn-group btn-group-left btn-reveal" style="animation-delay: 0.3s">
       <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-lang-hide="en,ja">
         <span data-i18n="hero.qq">玩家QQ群</span>
       </a>
@@ -38,17 +42,46 @@ const xUrl = 'https://x.com/paperlens1';
 </section>
 
 <style>
+  @keyframes spinGlow {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes sweepShine {
+    0% { left: -100%; }
+    60%, 100% { left: 150%; }
+  }
+  @keyframes logoPulse {
+    0%, 100% { filter: drop-shadow(0 0 24px rgba(0, 243, 255, 0.45)); }
+    50% { filter: drop-shadow(0 0 42px rgba(0, 243, 255, 0.85)) drop-shadow(0 0 16px rgba(180, 240, 255, 0.6)); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .hero {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 56px;
+    padding: 56px 0 8rem;
+    position: relative;
     background-color: #0a0a12;
     background-image: url('/Resources/KV1080P.png');
     background-repeat: no-repeat;
     background-size: 120%;           /* ← 放大到 120%（可调，默认 100% 是 cover 效果） */
     background-position: 25% center; /* ← 向右偏（50% 是正中，60% 是偏右 10%） */
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, rgba(14, 30, 48, 0) 0%, rgba(14, 30, 48, 1) 100%);
+    z-index: 3;
+    pointer-events: none;
   }
 
   .overlay {
@@ -68,8 +101,30 @@ const xUrl = 'https://x.com/paperlens1';
     filter: drop-shadow(0 0 24px rgba(0, 243, 255, 0.45));
     z-index: 2;
     display: none;
+    animation: logoPulse 4s ease-in-out infinite;
   }
   .logo-zh { display: block; }
+
+  /* Subtitle：logo 上方、按钮下方的小字 */
+  .hero-subtitle {
+    position: absolute;
+    bottom: 18.5%;
+    max-width: 70%;
+    text-align: center;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.1em;
+    -webkit-text-stroke: 0.25px rgba(80, 200, 255, 0.9);
+    text-shadow:
+      0 0 6px rgba(120, 220, 255, 0.75),
+      0 0 14px rgba(80, 180, 255, 0.4),
+      0 2px 8px rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    margin: 0;
+    line-height: 1.5;
+    pointer-events: none;
+  }
 
   /* 底部按钮组：横向居中，bottom 7%~17% */
   .bottom-buttons {
@@ -111,6 +166,8 @@ const xUrl = 'https://x.com/paperlens1';
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
     gap: 0.7rem;
+    position: relative;
+    overflow: hidden;
   }
 
   .btn:hover {
@@ -133,9 +190,49 @@ const xUrl = 'https://x.com/paperlens1';
 
   .btn-steam {
     background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    position: relative;
   }
   .btn-steam:hover { filter: brightness(1.15); }
+
+  /* H1: 流光包装器 - 比按钮大一点，显示旋转渐变光边 */
+  .btn-steam-wrap {
+    position: relative;
+    border-radius: 999px;
+    padding: 2px;
+    background: conic-gradient(
+      from 0deg,
+      rgba(0, 243, 255, 0.8),
+      rgba(255, 255, 255, 0.55),
+      rgba(120, 200, 255, 0.8),
+      rgba(0, 243, 255, 0.8)
+    );
+    animation: spinGlow 5s linear infinite;
+    flex-shrink: 0;
+  }
+  .btn-steam-wrap > .btn-steam {
+    border: none;
+  }
+
+  /* H2: 扫光高光条（独立元素，避免 transform 与 hover 冲突） */
+  .btn-steam > .btn-sweep {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.12) 40%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0.12) 60%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-22deg);
+    pointer-events: none;
+    z-index: 1;
+    animation: sweepShine 3.2s ease-in-out infinite;
+  }
 
   .btn-afdian {
     background: linear-gradient(135deg, #946ce6 0%, #e94de7 100%);
@@ -185,5 +282,16 @@ const xUrl = 'https://x.com/paperlens1';
     }
     .btn { min-width: 220px; font-size: 0.95rem; }
     .btn-small { min-width: 70px; font-size: 0.75rem; }
+    .hero-subtitle {
+      font-size: 0.8rem;
+      bottom: 30%;
+      max-width: 85%;
+    }
+  }
+
+  /* H4: 按钮错开入场 */
+  .btn-reveal {
+    opacity: 0;
+    animation: fadeUp 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
   }
 </style>
