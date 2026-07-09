@@ -1,16 +1,17 @@
-﻿{
+{
   "nav": {
     "home": "主页"
   },
   "hero": {
-    "tagline": "用旋律，调律世界",
+    "subtitle": "全新自由输入音游",
+    "tagline": "试玩版现已开放！",
     "release": "2027年初发售",
-    "demo": "试玩版现已开放",
-    "steam": "Steam 试玩",
-    "afdian": "爱发电",
+    "steam": "立即前往Steam试玩",
+    "afdian": "在爱发电支持我！",
     "qq": "QQ群",
     "bilibili": "Bilibili",
-    "discord": "Discord"
+    "discord": "Discord",
+    "x": "X"
   },
   "character": {
     "rechor": {
@@ -24,6 +25,15 @@
   },
   "song": {
     "title": "曲目"
+  },
+  "community": {
+    "title": "加入社群",
+    "qq": "玩家QQ群",
+    "qqDetail": "893086747",
+    "bilibili": "Bilibili",
+    "bilibiliDetail": "关注我们",
+    "discord": "Discord",
+    "discordDetail": "加入服务器"
   },
   "gameplay": {
     "tune": {

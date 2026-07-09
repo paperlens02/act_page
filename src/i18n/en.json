@@ -1,16 +1,17 @@
-﻿{
+{
   "nav": {
     "home": "Home"
   },
   "hero": {
-    "tagline": "Tune the world with melody",
+    "subtitle": "Free-Input Rhythm Game",
+    "tagline": "Demo Now Available!",
     "release": "Coming early 2027",
-    "demo": "Demo now available",
-    "steam": "Steam Demo",
-    "afdian": "Afdian",
+    "steam": "Play Demo on Steam",
+    "afdian": "Support me on Afdian",
     "qq": "QQ Group",
     "bilibili": "Bilibili",
-    "discord": "Discord"
+    "discord": "Discord",
+    "x": "X"
   },
   "character": {
     "rechor": {
@@ -19,20 +20,29 @@
     },
     "eiria": {
       "name": "Eiria",
-      "desc": "A free-spirited girl full of energy, her real name is Eiria. While fleeing persecution in the Outer World, she stumbled into the Inner World and discovered her father's abandoned lab. Wielding a family heirloom staff, she resolved to carry out the 'Cell Tuning Project' — infusing spirituality into humanity's subconscious. Rebellious yet resolute, with occasional glimpses of a refined lady."
+      "desc": "A free-spirited girl full of energy, her real name is Eiria. While fleeing persecution in the Outer World, she stumbled into the Inner World and discovered her father's abandoned lab. Wielding a family heirloom staff, she resolved to carry out the Cell Tuning Project. Rebellious yet resolute, with occasional glimpses of a refined lady."
     }
   },
   "song": {
     "title": "Tracks"
   },
+  "community": {
+    "title": "Join Our Community",
+    "qq": "QQ Group",
+    "qqDetail": "893086747",
+    "bilibili": "Bilibili",
+    "bilibiliDetail": "Follow us",
+    "discord": "Discord",
+    "discordDetail": "Join server"
+  },
   "gameplay": {
     "tune": {
       "title": "Tune Mode",
-      "desc": "Innovative laneless rhythm game: any key triggers a judgment, play comfortably even lying down.<br>Note affinity: Red for jacks, Green for flows, Blue for tech — forming key strategies.<br>Multi-dimensional scoring: affinity inputs don't affect technical score, only earn art points.<br>Accumulate art points to unlock story and collectibles."
+      "desc": "Innovative laneless rhythm game: any key triggers a judgment, play comfortably even lying down.<br>Note affinity: Red for jacks, Green for flows, Blue for tech.<br>Multi-dimensional scoring: affinity inputs only earn art points.<br>Accumulate art points to unlock story and collectibles."
     },
     "fight": {
       "title": "Fight Mode",
-      "desc": "A brand-new combat rhythm experience: battle enemies to the melody.<br>Three skill types: Beat for heavy strikes, Flow for rapid combos, Tech for artful techniques.<br>Charge & finish: build energy and unleash a finishing move for a one-hit KO.<br>Hero versus monsters — an intense battle of offense and defense, unfolding in rhythm."
+      "desc": "A brand-new combat rhythm experience: battle enemies to the melody.<br>Three skill types: Beat, Flow, Tech for different attack styles.<br>Charge and finish: build energy and unleash a finishing move.<br>Hero versus monsters, an intense battle unfolding in rhythm."
     }
   }
 }

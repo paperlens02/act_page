@@ -20,6 +20,7 @@ const songs = metaFiles.map(f => {
 });
 ---
 <section class="songs snap-section" id="songs">
+  <img id="songBg" class="song-bg" src={songs[0]?.cover ?? ''} alt="" />
   <div class="songs-inner">
     <h2 class="songs-title" data-i18n="song.title">曲目</h2>
     <div class="carousel-wrapper">
@@ -34,6 +35,7 @@ const songs = metaFiles.map(f => {
               data-index={i}
               data-name={song.name}
               data-artist={song.artist}
+              data-cover={song.cover}
             >
               <img src={song.cover} alt={song.name} loading="lazy" draggable="false" />
             </div>
@@ -82,6 +84,8 @@ const songs = metaFiles.map(f => {
       const activeItem = items[index];
       songNameEl.textContent = activeItem.dataset.name || '';
       songArtistEl.textContent = activeItem.dataset.artist || '';
+      const songBgEl = document.getElementById('songBg');
+      if (songBgEl) songBgEl.src = activeItem.dataset.cover || '';
       const containerWidth = container.offsetWidth;
       const itemLeft = activeItem.offsetLeft;
       const itemWidth = activeItem.offsetWidth;
@@ -205,7 +209,6 @@ const songs = metaFiles.map(f => {
 <style>
   .songs {
     position: relative;
-    background: url('/Resources/bg_tunespace.png') center center / cover no-repeat;
     background-color: #081020;
     display: flex;
     align-items: center;
@@ -213,7 +216,22 @@ const songs = metaFiles.map(f => {
     padding: 80px 2rem 4rem;
   }
 
+  .song-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(60px) brightness(0.4);
+    transform: scale(1.2);
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
   .songs-inner {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     width: 100%;
     text-align: center;

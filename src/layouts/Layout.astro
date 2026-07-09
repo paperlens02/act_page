@@ -78,6 +78,17 @@ const translations = { zh, en, ja };
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
       });
+
+      // Hide/show elements based on data-lang-hide
+      document.querySelectorAll('[data-lang-hide]').forEach(el => {
+        const hiddenLangs = el.getAttribute('data-lang-hide').split(',');
+        el.style.display = hiddenLangs.includes(lang) ? 'none' : '';
+      });
+
+      // Switch logo based on language
+      document.querySelectorAll('[data-logo-lang]').forEach(img => {
+        img.style.display = img.getAttribute('data-logo-lang') === lang ? 'block' : 'none';
+      });
     }
 
     function getNestedValue(obj, path) {

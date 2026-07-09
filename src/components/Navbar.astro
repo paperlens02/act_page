@@ -1,9 +1,12 @@
-﻿---
+---
 // 顶端导航栏 - 主页链接 + 语言切换
 ---
 <nav class="navbar" id="navbar">
   <div class="navbar-content">
-    <a href="/" class="navbar-brand">Act!</a>
+    <a href="/" class="navbar-brand">
+      <img src="/Resources/icon.png" alt="" class="navbar-icon" />
+      <span>Act!</span>
+    </a>
     <div class="navbar-links">
       <a href="#hero" class="navbar-link" data-i18n="nav.home">主页</a>
       <div class="lang-switcher">
@@ -48,10 +51,22 @@
   }
 
   .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .navbar-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .navbar-brand span {
     font-size: 1.5rem;
     font-weight: 800;
     color: #00f3ff;
-    text-decoration: none;
     letter-spacing: 0.08em;
     text-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
   }

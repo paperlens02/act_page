@@ -1,39 +1,44 @@
-﻿---
+---
 const steamUrl = 'https://store.steampowered.com/app/4369260/Act';
 const afdianUrl = 'https://ifdian.net/a/paperlens';
 const qqUrl = 'https://qm.qq.com/q/AG8zBBaE2s';
 const bilibiliUrl = 'https://space.bilibili.com/';
 const discordUrl = 'https://discord.gg/DS8BwKxP';
+const xUrl = 'https://x.com/paperlens1';
 ---
 <section class="hero snap-section" id="hero">
   <div class="overlay"></div>
   <div class="content">
     <h1 class="hero-logo">
-      <img
-        src="/Resources/logo.png"
-        alt="Act! 细胞调律"
-        class="logo"
-      />
+      <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
+      <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
+      <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
     </h1>
-    <p class="tagline" data-i18n="hero.demo">试玩版现已开放</p>
+    <div class="hero-text-group">
+      <p class="hero-subtitle" data-i18n="hero.subtitle">全新自由输入音游</p>
+      <p class="hero-tagline" data-i18n="hero.tagline">试玩版现已开放！</p>
+    </div>
     <p class="release" data-i18n="hero.release">2027年初发售</p>
     <div class="buttons">
       <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam" data-i18n="hero.steam">
-        Steam 试玩
+        立即前往Steam试玩
       </a>
       <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian" data-i18n="hero.afdian">
-        爱发电
+        在爱发电支持我！
       </a>
     </div>
     <div class="community-buttons">
-      <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-i18n="hero.qq">
+      <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-i18n="hero.qq" data-lang-hide="en,ja">
         QQ群
       </a>
-      <a href={bilibiliUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-bilibili" data-i18n="hero.bilibili">
+      <a href={bilibiliUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-bilibili" data-i18n="hero.bilibili" data-lang-hide="en,ja">
         Bilibili
       </a>
-      <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-discord" data-i18n="hero.discord">
+      <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-discord" data-i18n="hero.discord" data-lang-hide="zh">
         Discord
+      </a>
+      <a href={xUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-x" data-i18n="hero.x" data-lang-hide="zh">
+        X
       </a>
     </div>
   </div>
@@ -61,7 +66,7 @@ const discordUrl = 'https://discord.gg/DS8BwKxP';
     z-index: 1;
     text-align: center;
     padding: 2rem;
-    max-width: 900px;
+    max-width: 1000px;
   }
 
   .hero-logo {
@@ -72,28 +77,53 @@ const discordUrl = 'https://discord.gg/DS8BwKxP';
   }
 
   .logo {
-    max-width: 90%;
+    max-width: 80%;
     height: auto;
-    width: 600px;
+    width: 720px;
     margin-bottom: 1.5rem;
     filter: drop-shadow(0 0 24px rgba(0, 243, 255, 0.45));
+    display: none;
   }
 
-  .tagline {
-    font-size: clamp(1.4rem, 4vw, 2.4rem);
-    font-weight: 700;
+  .logo-zh {
+    display: block;
+  }
+
+  /* 双行错位文字 */
+  .hero-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    letter-spacing: 0.15em;
+    align-self: flex-start;
+    margin-left: 15%;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+    font-weight: 800;
     color: #00f3ff;
-    text-shadow: 0 0 16px rgba(0, 243, 255, 0.6), 0 2px 4px rgba(0, 0, 0, 0.8);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.12em;
+    text-shadow: 0 0 20px rgba(0, 243, 255, 0.6), 0 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.1em;
+    align-self: flex-end;
+    margin-right: 10%;
   }
 
   .release {
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
     color: #ffffff;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    margin-bottom: 2.5rem;
-    opacity: 0.9;
+    margin-bottom: 2rem;
+    opacity: 0.8;
   }
 
   .buttons {
@@ -104,7 +134,7 @@ const discordUrl = 'https://discord.gg/DS8BwKxP';
     margin-bottom: 1.5rem;
   }
 
-  @media (min-width: 480px) {
+  @media (min-width: 600px) {
     .buttons {
       flex-direction: row;
       justify-content: center;
@@ -115,10 +145,10 @@ const discordUrl = 'https://discord.gg/DS8BwKxP';
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 180px;
-    padding: 0.85rem 2rem;
+    min-width: 260px;
+    padding: 1.1rem 2.5rem;
     border-radius: 999px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #ffffff;
     text-decoration: none;
@@ -198,5 +228,10 @@ const discordUrl = 'https://discord.gg/DS8BwKxP';
   .btn-discord:hover {
     border-color: #5865f2;
     color: #5865f2;
+  }
+
+  .btn-x:hover {
+    border-color: #ffffff;
+    color: #ffffff;
   }
 </style>
