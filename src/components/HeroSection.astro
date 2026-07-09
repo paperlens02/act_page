@@ -2,43 +2,36 @@
 const steamUrl = 'https://store.steampowered.com/app/4369260/Act';
 const afdianUrl = 'https://ifdian.net/a/paperlens';
 const qqUrl = 'https://qm.qq.com/q/AG8zBBaE2s';
-const bilibiliUrl = 'https://space.bilibili.com/';
+const bilibiliUrl = 'https://space.bilibili.com/3546742811265924';
 const discordUrl = 'https://discord.gg/DS8BwKxP';
 const xUrl = 'https://x.com/paperlens1';
 ---
 <section class="hero snap-section" id="hero">
   <div class="overlay"></div>
-  <div class="content">
-    <h1 class="hero-logo">
-      <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
-      <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
-      <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
-    </h1>
-    <div class="hero-text-group">
-      <p class="hero-subtitle" data-i18n="hero.subtitle">全新自由输入音游</p>
-      <p class="hero-tagline" data-i18n="hero.tagline">试玩版现已开放！</p>
-    </div>
-    <p class="release" data-i18n="hero.release">2027年初发售</p>
-    <div class="buttons">
-      <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam" data-i18n="hero.steam">
-        立即前往Steam试玩
+  <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
+  <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
+  <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
+  <div class="bottom-buttons">
+    <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian">
+      <img src="/Resources/logo_afdian.png" alt="" class="btn-icon" />
+      <span data-i18n="hero.afdian">在爱发电支持我！</span>
+    </a>
+    <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam btn-center">
+      <img src="/Resources/logo_steam.png" alt="" class="btn-icon" />
+      <span data-i18n="hero.steam">下载试玩版</span>
+    </a>
+    <div class="btn-group btn-group-left">
+      <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-lang-hide="en,ja">
+        <span data-i18n="hero.qq">玩家QQ群</span>
       </a>
-      <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian" data-i18n="hero.afdian">
-        在爱发电支持我！
+      <a href={bilibiliUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-bilibili" data-lang-hide="en,ja">
+        <span data-i18n="hero.bilibili">Bilibili</span>
       </a>
-    </div>
-    <div class="community-buttons">
-      <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-i18n="hero.qq" data-lang-hide="en,ja">
-        QQ群
+      <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-discord" data-lang-hide="zh">
+        <span data-i18n="hero.discord">Discord</span>
       </a>
-      <a href={bilibiliUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-bilibili" data-i18n="hero.bilibili" data-lang-hide="en,ja">
-        Bilibili
-      </a>
-      <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-discord" data-i18n="hero.discord" data-lang-hide="zh">
-        Discord
-      </a>
-      <a href={xUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-x" data-i18n="hero.x" data-lang-hide="zh">
-        X
+      <a href={xUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-x" data-lang-hide="zh">
+        <span data-i18n="hero.x">X</span>
       </a>
     </div>
   </div>
@@ -50,9 +43,12 @@ const xUrl = 'https://x.com/paperlens1';
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('/Resources/KV1080P.png') center center / cover no-repeat;
-    background-color: #0a0a12;
     padding-top: 56px;
+    background-color: #0a0a12;
+    background-image: url('/Resources/KV1080P.png');
+    background-repeat: no-repeat;
+    background-size: 120%;           /* ← 放大到 120%（可调，默认 100% 是 cover 效果） */
+    background-position: 25% center; /* ← 向右偏（50% 是正中，60% 是偏右 10%） */
   }
 
   .overlay {
@@ -61,144 +57,101 @@ const xUrl = 'https://x.com/paperlens1';
     background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.55) 100%);
   }
 
-  .content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 2rem;
-    max-width: 1000px;
-  }
-
-  .hero-logo {
-    margin: 0;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: 0;
-  }
-
+  /* Logo：绝对定位，bottom 25%，高度 15% */
   .logo {
+    position: absolute;
+    bottom: 20%;
+    height: 25%;
+    width: auto;
     max-width: 80%;
-    height: auto;
-    width: 720px;
-    margin-bottom: 1.5rem;
+    margin: 0;
     filter: drop-shadow(0 0 24px rgba(0, 243, 255, 0.45));
+    z-index: 2;
     display: none;
   }
+  .logo-zh { display: block; }
 
-  .logo-zh {
-    display: block;
-  }
-
-  /* 双行错位文字 */
-  .hero-text-group {
+  /* 底部按钮组：横向居中，bottom 7%~17% */
+  .bottom-buttons {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
-    margin-bottom: 0.8rem;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0 3%;
+    z-index: 2;
   }
 
-  .hero-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-    letter-spacing: 0.15em;
-    align-self: flex-start;
-    margin-left: 15%;
-  }
-
-  .hero-tagline {
-    font-size: clamp(1.6rem, 4.5vw, 2.8rem);
-    font-weight: 800;
-    color: #00f3ff;
-    text-shadow: 0 0 20px rgba(0, 243, 255, 0.6), 0 2px 4px rgba(0, 0, 0, 0.8);
-    letter-spacing: 0.1em;
-    align-self: flex-end;
-    margin-right: 10%;
-  }
-
-  .release {
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    color: #ffffff;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    margin-bottom: 2rem;
-    opacity: 0.8;
-  }
-
-  .buttons {
+  /* 左侧社群按钮组 */
+  .btn-group {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .btn-group-left {
+    justify-content: flex-end;
   }
 
-  @media (min-width: 600px) {
-    .buttons {
-      flex-direction: row;
-      justify-content: center;
-    }
-  }
-
+  /* 大按钮（Steam / 爱发电） */
   .btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    min-width: 260px;
-    padding: 1.1rem 2.5rem;
+    justify-content: flex-start;
+    min-width: 240px;
+    padding: 0.9rem 1.6rem;
     border-radius: 999px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #ffffff;
     text-decoration: none;
     letter-spacing: 0.05em;
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    gap: 0.7rem;
   }
 
   .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
   }
+  .btn:active { transform: translateY(0); }
 
-  .btn:active {
-    transform: translateY(0);
+  /* 居中的 Steam 按钮（最中间） */
+  .btn-center {
+    flex-shrink: 0;
+  }
+
+  .btn-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   .btn-steam {
     background: linear-gradient(135deg, #1b2838 0%, #2a475e 100%);
     border: 2px solid rgba(255, 255, 255, 0.15);
   }
-
-  .btn-steam:hover {
-    filter: brightness(1.15);
-  }
+  .btn-steam:hover { filter: brightness(1.15); }
 
   .btn-afdian {
     background: linear-gradient(135deg, #946ce6 0%, #e94de7 100%);
     border: 2px solid rgba(255, 255, 255, 0.15);
   }
+  .btn-afdian:hover { filter: brightness(1.1); }
 
-  .btn-afdian:hover {
-    filter: brightness(1.1);
-  }
-
-  .community-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
-  }
-
+  /* 小按钮（社群） */
   .btn-small {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    padding: 0.5rem 1.2rem;
+    min-width: 80px;
+    padding: 0.4rem 1rem;
     border-radius: 999px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #ffffff;
     text-decoration: none;
@@ -215,23 +168,22 @@ const xUrl = 'https://x.com/paperlens1';
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
-  .btn-qq:hover {
-    border-color: #00f3ff;
-    color: #00f3ff;
-  }
+  .btn-qq:hover { border-color: #00f3ff; color: #00f3ff; }
+  .btn-bilibili:hover { border-color: #fb7299; color: #fb7299; }
+  .btn-discord:hover { border-color: #5865f2; color: #5865f2; }
+  .btn-x:hover { border-color: #ffffff; color: #ffffff; }
 
-  .btn-bilibili:hover {
-    border-color: #fb7299;
-    color: #fb7299;
-  }
-
-  .btn-discord:hover {
-    border-color: #5865f2;
-    color: #5865f2;
-  }
-
-  .btn-x:hover {
-    border-color: #ffffff;
-    color: #ffffff;
+  /* 移动端适配 */
+  @media (max-width: 900px) {
+    .bottom-buttons {
+      flex-direction: column;
+      gap: 0.75rem;
+      bottom: 4%;
+    }
+    .btn-group {
+      justify-content: center;
+    }
+    .btn { min-width: 220px; font-size: 0.95rem; }
+    .btn-small { min-width: 70px; font-size: 0.75rem; }
   }
 </style>

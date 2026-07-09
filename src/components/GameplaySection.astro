@@ -2,6 +2,7 @@
 // 玩法介绍部分 - 接收 props：背景色、标题、正文、section ID
 const {
   background = '#0d1a2e',
+  backgroundImage = '',
   title = '',
   text = '',
   sectionId = '',
@@ -9,7 +10,7 @@ const {
   textI18n = '',
 } = Astro.props;
 ---
-<section class="gameplay snap-section" id={sectionId} style={`background-color: ${background};`}>
+<section class="gameplay snap-section" id={sectionId} style={`background-color: ${background};${backgroundImage ? " background-image: url('" + backgroundImage + "'); background-size: cover; background-position: center; background-repeat: no-repeat;" : ""}`}>
   <div class="gameplay-content">
     <h2 class="gameplay-title" data-i18n={titleI18n}>{title}</h2>
     <p class="gameplay-text" data-i18n-html={textI18n}>{text}</p>

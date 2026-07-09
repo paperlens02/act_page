@@ -22,7 +22,7 @@ const songs = metaFiles.map(f => {
 <section class="songs snap-section" id="songs">
   <img id="songBg" class="song-bg" src={songs[0]?.cover ?? ''} alt="" />
   <div class="songs-inner">
-    <h2 class="songs-title" data-i18n="song.title">曲目</h2>
+    <h2 class="songs-title" data-i18n="song.title">精选优质曲目</h2>
     <div class="carousel-wrapper">
       <button class="carousel-arrow carousel-arrow-left" id="arrowLeft" aria-label="Previous">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -209,6 +209,7 @@ const songs = metaFiles.map(f => {
 <style>
   .songs {
     position: relative;
+    overflow: hidden;
     background-color: #081020;
     display: flex;
     align-items: center;
@@ -222,8 +223,8 @@ const songs = metaFiles.map(f => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(60px) brightness(0.4);
-    transform: scale(1.2);
+    filter: blur(15px) brightness(0.4) contrast(1) saturate(1.5);
+    transform: scale(1);
     transition: opacity 0.5s ease;
     z-index: 0;
     pointer-events: none;
