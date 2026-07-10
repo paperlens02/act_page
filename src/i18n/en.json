@@ -9,7 +9,8 @@
     "qq": "QQ Group",
     "bilibili": "Bilibili",
     "discord": "Discord",
-    "x": "X"
+    "x": "X",
+    "h1": "Act! - A Free-Input Rhythm Game You Play with a Controller"
   },
   "character": {
     "rechor": {
@@ -45,5 +46,9 @@
   },
   "footer": {
     "business": "Business Inquiries: "
+  },
+  "meta": {
+    "title": "Act! - Free-Input Controller Rhythm Game | Free Steam Demo",
+    "description": "Act! is a free-input controller rhythm game — the free Steam demo is out now! Play with fully free input strategy and a laid-back controller feel, enjoy a hand-picked track list with a built-in custom editor, and dive into a bright yet profound fragmented story with mysterious collection-based progression. Download it free on Steam today!"
   }
 }

@@ -87,6 +87,15 @@ const translations = { zh, en, ja };
     const i18nData = translations;
     let currentLang = localStorage.getItem('lang') || 'zh';
 
+    // 记录 SSR 默认的中文 <title>/description，切回中文时兜底
+    const defaultTitle = document.title;
+    const defaultDesc = document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+
+    function setMeta(sel, content) {
+      const el = document.querySelector(sel);
+      if (el) el.setAttribute('content', content);
+    }
+
     function applyLang(lang) {
       currentLang = lang;
       localStorage.setItem('lang', lang);
@@ -127,6 +136,16 @@ const translations = { zh, en, ja };
       document.querySelectorAll('[data-logo-lang]').forEach(img => {
         img.style.display = img.getAttribute('data-logo-lang') === lang ? 'block' : 'none';
       });
+
+      // 多语言 <title> 与 meta 描述（zh 无 meta 键，用 SSR 默认值兜底）
+      const metaTitle = getNestedValue(i18nData[lang], 'meta.title') || defaultTitle;
+      const metaDesc = getNestedValue(i18nData[lang], 'meta.description') || defaultDesc;
+      document.title = metaTitle;
+      setMeta('meta[name="description"]', metaDesc);
+      setMeta('meta[property="og:title"]', metaTitle);
+      setMeta('meta[property="og:description"]', metaDesc);
+      setMeta('meta[name="twitter:title"]', metaTitle);
+      setMeta('meta[name="twitter:description"]', metaDesc);
     }
 
     function getNestedValue(obj, path) {

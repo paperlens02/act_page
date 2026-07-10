@@ -20,7 +20,7 @@ const songs = metaFiles.map(f => {
 });
 ---
 <section class="songs snap-section" id="songs">
-  <img id="songBg" class="song-bg" src={songs[0]?.cover ?? ''} alt="" />
+  <img id="songBg" class="song-bg" src={songs[0]?.cover ?? ''} alt="歌曲封面背景" aria-hidden="true" />
   <div class="songs-inner">
     <h2 class="songs-title song-reveal" data-i18n="song.title">精选优质曲目</h2>
     <div class="carousel-wrapper">
