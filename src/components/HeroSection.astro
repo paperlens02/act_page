@@ -8,67 +8,74 @@ const xUrl = 'https://x.com/paperlens1';
 ---
 <section class="hero snap-section" id="hero">
   <div class="overlay"></div>
-  <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
-  <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
-  <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
-  <p class="hero-subtitle"><span class="btn-reveal" style="animation-delay: 0.4s" data-i18n="hero.subtitle">自由输入，手柄躺玩！全新音游玩法将于2027年初正式登场！</span></p>
-  <div class="bottom-buttons">
-    <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian btn-reveal" style="animation-delay: 0.15s">
-      <img src="/Resources/logo_afdian.png" alt="" class="btn-icon" />
-      <span data-i18n="hero.afdian">在爱发电支持我！</span>
-    </a>
-    <div class="btn-steam-wrap btn-reveal" style="animation-delay: 0s">
-      <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam btn-center">
-        <span class="btn-sweep"></span>
-        <img src="/Resources/logo_steam.png" alt="" class="btn-icon" />
-        <span data-i18n="hero.steam">下载试玩版</span>
+  <div class="hero-content">
+    <img src="/Resources/logo.png" alt="Act!" class="logo logo-zh" data-logo-lang="zh" />
+    <img src="/Resources/logo_en.png" alt="Act!" class="logo logo-en" data-logo-lang="en" />
+    <img src="/Resources/logo_jp.png" alt="Act!" class="logo logo-ja" data-logo-lang="ja" />
+    <p class="hero-subtitle"><span class="btn-reveal" style="animation-delay: 0.4s" data-i18n="hero.subtitle">自由输入，手柄躺玩！全新音游玩法将于2027年初正式登场！</span></p>
+    <div class="bottom-buttons">
+      <a href={afdianUrl} target="_blank" rel="noopener noreferrer" class="btn btn-afdian btn-reveal" style="animation-delay: 0.15s">
+        <img src="/Resources/logo_afdian.png" alt="" class="btn-icon" />
+        <span data-i18n="hero.afdian">在爱发电支持我！</span>
       </a>
-    </div>
-    <div class="btn-group btn-group-left btn-reveal" style="animation-delay: 0.3s">
-      <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-lang-hide="en,ja">
-        <span data-i18n="hero.qq">玩家QQ群</span>
-      </a>
-      <a href={bilibiliUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-bilibili" data-lang-hide="en,ja">
-        <span data-i18n="hero.bilibili">Bilibili</span>
-      </a>
-      <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-discord" data-lang-hide="zh">
-        <span data-i18n="hero.discord">Discord</span>
-      </a>
-      <a href={xUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-x" data-lang-hide="zh">
-        <span data-i18n="hero.x">X</span>
-      </a>
+      <div class="btn-steam-wrap btn-reveal" style="animation-delay: 0s">
+        <a href={steamUrl} target="_blank" rel="noopener noreferrer" class="btn btn-steam btn-center">
+          <span class="btn-sweep"></span>
+          <img src="/Resources/logo_steam.png" alt="" class="btn-icon" />
+          <span data-i18n="hero.steam">下载试玩版</span>
+        </a>
+      </div>
+      <div class="btn-group btn-group-left btn-reveal" style="animation-delay: 0.3s">
+        <a href={qqUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-qq" data-lang-hide="en,ja">
+          <span data-i18n="hero.qq">玩家QQ群</span>
+        </a>
+        <a href={bilibiliUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-bilibili" data-lang-hide="en,ja">
+          <span data-i18n="hero.bilibili">Bilibili</span>
+        </a>
+        <a href={discordUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-discord" data-lang-hide="zh">
+          <span data-i18n="hero.discord">Discord</span>
+        </a>
+        <a href={xUrl} target="_blank" rel="noopener noreferrer" class="btn-small btn-x" data-lang-hide="zh">
+          <span data-i18n="hero.x">X</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  // KV 背景图适配：保持 120% 放大，只在即将出现黑边时切换 cover
-  function checkKVBackground() {
+  // KV 背景图统一适配（宽屏 / 竖屏共用同一套参数）：
+  // 以 cover 为基准（保证铺满无黑边），再叠加统一的缩放 FOCAL_SIZE 与焦点 FOCAL_X/FOCAL_Y，
+  // 由 JS 按容器尺寸实时计算像素级 background-size / background-position，
+  // 保证任何比例下缩放和中心点完全一致。
+  const R = 16 / 9;        // KV1080P 宽高比 (1920x1080)
+  const FOCAL_SIZE = 1.2;  // 缩放：1.0 = 恰好铺满(cover)，>1 放大。原宽屏 120% 即 1.2
+  const FOCAL_X = 0.45;    // 水平焦点：0=最左, 0.5=正中, 1=最右
+  const FOCAL_Y = 0.5;     // 垂直焦点：0=顶, 0.5=中, 1=底
+  function fitKV() {
     const hero = document.querySelector('.hero');
     if (!hero) return;
-    
     const w = hero.offsetWidth;
     const h = hero.offsetHeight;
-    const ratio = w / h;
-    
-    // 图片原始比例 1920x1080 = 1.778
-    // 120% 放大后，覆盖范围 = 1.778 / 1.2 = 1.481
-    const imgRatio = 1920 / 1080;
-    const scaledRatio = imgRatio / 1.2;
-    
-    // 当容器比例超出放大后图片覆盖范围时，切换 cover
-    if (ratio < scaledRatio) {
-      hero.classList.add('kv-cover');
+    // 1) cover 基准尺寸（宽或高填满，取决于容器比例），保证无黑边
+    let baseW, baseH;
+    if (w / h >= R) {
+      baseW = w;      baseH = w / R;
     } else {
-      hero.classList.remove('kv-cover');
+      baseH = h;      baseW = h * R;
     }
+    // 2) 叠加统一缩放
+    const imgW = baseW * FOCAL_SIZE;
+    const imgH = baseH * FOCAL_SIZE;
+    // 3) 让焦点 (FOCAL_X, FOCAL_Y) 精确落在容器中心
+    const posX = w / 2 - FOCAL_X * imgW;
+    const posY = h / 2 - FOCAL_Y * imgH;
+    hero.style.backgroundSize = imgW + 'px ' + imgH + 'px';
+    hero.style.backgroundPosition = posX + 'px ' + posY + 'px';
   }
-  
-  // 立即执行一次
-  checkKVBackground();
-  
-  // 监听 resize
-  window.addEventListener('resize', checkKVBackground);
+  fitKV();
+  window.addEventListener('resize', fitKV);
+  window.addEventListener('load', fitKV);
 </script>
 
 <style>
@@ -90,21 +97,11 @@ const xUrl = 'https://x.com/paperlens1';
 
   .hero {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 56px 0 8rem;
-    position: relative;
     background-color: #0a0a12;
     background-image: url('/Resources/KV1080P.png');
     background-repeat: no-repeat;
-    background-size: 120%;          
-    background-position: 25% center;
-  }
-  
-  .hero.kv-cover {
-    background-size: cover;          
-    background-position: center;
+    background-size: cover;      /* 无 JS 时兜底；实际尺寸由 JS 统一计算 */
+    background-position: center; /* 无 JS 时兜底；实际位置由 JS 统一计算 */
   }
 
   .hero::after {
@@ -115,7 +112,7 @@ const xUrl = 'https://x.com/paperlens1';
     bottom: 0;
     height: 160px;
     background: linear-gradient(to bottom, rgba(14, 30, 48, 0) 0%, rgba(14, 30, 48, 1) 100%);
-    z-index: 3;
+    z-index: 1;
     pointer-events: none;
   }
 
@@ -123,27 +120,38 @@ const xUrl = 'https://x.com/paperlens1';
     position: absolute;
     inset: 0;
     background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.55) 100%);
+    z-index: 1;
   }
 
-  /* Logo：绝对定位，bottom 25%，高度 15% */
-  .logo {
+  /* 三元素纵向容器：锚定底部，flex 纵向排列，天然不重叠 */
+  .hero-content {
     position: absolute;
-    bottom: 20%;
-    height: 25%;
+    left: 0;
+    right: 0;
+    bottom: 9%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(1rem, 3vh, 2.4rem);
+    padding: 0 3%;
+    z-index: 2;
+  }
+
+  /* Logo：宽屏用视口高度驱动（25vh） */
+  .logo {
+    height: 25vh;
     width: auto;
     max-width: 80%;
     margin: 0;
     filter: drop-shadow(0 0 24px rgba(0, 243, 255, 0.45));
-    z-index: 2;
     display: none;
     animation: logoPulse 4s ease-in-out infinite;
   }
   .logo-zh { display: block; }
 
-  /* Subtitle：logo 上方、按钮下方的小字 */
+  /* Subtitle：在流内居中 */
   .hero-subtitle {
-    position: absolute;
-    bottom: 18.5%;
     max-width: 70%;
     text-align: center;
     font-size: 1.15rem;
@@ -155,29 +163,20 @@ const xUrl = 'https://x.com/paperlens1';
       0 0 6px rgba(120, 220, 255, 0.75),
       0 0 14px rgba(80, 180, 255, 0.4),
       0 2px 8px rgba(0, 0, 0, 0.6);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
     margin: 0;
     line-height: 1.5;
     pointer-events: none;
   }
 
-  /* 底部按钮组：横向居中，bottom 7%~17% */
+  /* 底部按钮组：横向居中 */
   .bottom-buttons {
-    position: absolute;
-    bottom: 10%;
-    left: 0;
-    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    padding: 0 3%;
-    z-index: 2;
+    width: 100%;
   }
 
-  /* 左侧社群按钮组 */
   .btn-group {
     display: flex;
     flex-wrap: wrap;
@@ -187,7 +186,6 @@ const xUrl = 'https://x.com/paperlens1';
     justify-content: flex-end;
   }
 
-  /* 大按钮（Steam / 爱发电） */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -213,7 +211,6 @@ const xUrl = 'https://x.com/paperlens1';
   }
   .btn:active { transform: translateY(0); }
 
-  /* 居中的 Steam 按钮（最中间） */
   .btn-center {
     flex-shrink: 0;
   }
@@ -231,7 +228,6 @@ const xUrl = 'https://x.com/paperlens1';
   }
   .btn-steam:hover { filter: brightness(1.15); }
 
-  /* H1: 流光包装器 - 比按钮大一点，显示旋转渐变光边 */
   .btn-steam-wrap {
     position: relative;
     border-radius: 999px;
@@ -250,7 +246,6 @@ const xUrl = 'https://x.com/paperlens1';
     border: none;
   }
 
-  /* H2: 扫光高光条（独立元素，避免 transform 与 hover 冲突） */
   .btn-steam > .btn-sweep {
     position: absolute;
     top: 0;
@@ -277,7 +272,6 @@ const xUrl = 'https://x.com/paperlens1';
   }
   .btn-afdian:hover { filter: brightness(1.1); }
 
-  /* 小按钮（社群） */
   .btn-small {
     display: inline-flex;
     align-items: center;
@@ -307,12 +301,11 @@ const xUrl = 'https://x.com/paperlens1';
   .btn-discord:hover { border-color: #5865f2; color: #5865f2; }
   .btn-x:hover { border-color: #ffffff; color: #ffffff; }
 
-  /* 移动端适配 */
+  /* 中等屏幕：按钮改纵向堆叠 */
   @media (max-width: 900px) {
     .bottom-buttons {
       flex-direction: column;
       gap: 0.75rem;
-      bottom: 4%;
     }
     .btn-group {
       justify-content: center;
@@ -321,47 +314,28 @@ const xUrl = 'https://x.com/paperlens1';
     .btn-small { min-width: 70px; font-size: 0.75rem; }
     .hero-subtitle {
       font-size: 0.8rem;
-      bottom: 30%;
       max-width: 85%;
     }
   }
 
-  /* ===== 手机竖屏适配 ===== */
+  /* ===== 手机竖屏适配（背景由 JS 控制 cover，这里只调布局） ===== */
   @media (max-width: 768px) and (orientation: portrait) {
-    /* 背景：cover 铺满，避免 120% 按宽算时顶部/底部留黑 */
-    .hero {
-      background-size: cover;
-      background-position: center center;
-      padding: 0;
+    .hero-content {
+      bottom: 5%;
+      gap: clamp(0.8rem, 2.2vh, 1.6rem);
     }
-
-    /* Logo：改为宽度驱动（避免 height 25% 在竖屏下拉长挤压），居中于视口偏上 */
+    /* Logo：改为宽度驱动，避免竖屏下 25vh 过大 */
     .hero .logo {
-      top: 28%;
-      bottom: auto;
-      width: 52%;
-      max-width: 75%;
       height: auto;
-      left: 50%;
-      transform: translateX(-50%);
+      width: 55%;
+      max-width: 75%;
     }
-
-    /* Subtitle：紧贴 logo 下方（top 驱动，避开 bottom% 在竖屏下的重叠问题） */
     .hero .hero-subtitle {
-      top: 54%;
-      bottom: auto;
-      left: 50%;
-      transform: translateX(-50%);
       max-width: 82%;
       font-size: 0.88rem;
-      text-align: center;
     }
-
-    /* 按钮组：贴底，缩小内边距 */
     .hero .bottom-buttons {
-      bottom: 4%;
       gap: 0.5rem;
-      padding: 0 5%;
     }
     .hero .btn {
       min-width: 180px;
@@ -381,14 +355,11 @@ const xUrl = 'https://x.com/paperlens1';
       justify-content: center;
       gap: 0.4rem;
     }
-
-    /* 底部渐变缩短，避免吃掉过多按钮空间 */
     .hero::after {
       height: 110px;
     }
   }
 
-  /* H4: 按钮错开入场 */
   .btn-reveal {
     opacity: 0;
     animation: fadeUp 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
