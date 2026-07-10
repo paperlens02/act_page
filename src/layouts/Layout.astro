@@ -4,10 +4,10 @@ import zh from '../i18n/zh.json';
 import en from '../i18n/en.json';
 import ja from '../i18n/ja.json';
 
-const { title = 'Act! 细胞调律 官方网站 | Steam试玩版已开放' } = Astro.props;
+const { title = 'Act! 细胞调律 | 手柄音游 官方网站 | Steam试玩版已开放' } = Astro.props;
 
 const siteUrl = 'https://paperactgames.com';
-const description = '创新无轨音游《Act! 细胞调律》Steam免费试玩开放中！完全自由的输入策略，轻松沉浸的手柄体验；严选优质曲目，并内置自定义编辑器；明快而深邃的碎片式剧情、充满神秘的收集养成——立即前往Steam免费下载！';
+const description = '自由输入手柄音游《Act! 细胞调律》Steam免费试玩开放中！完全自由的输入策略，轻松沉浸的手柄体验；严选优质曲目，并内置自定义编辑器；明快而深邃的碎片式剧情、充满神秘的收集养成——立即前往Steam免费下载！';
 const ogImage = '/Resources/KV1080P.png';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
@@ -21,11 +21,15 @@ const translations = { zh, en, ja };
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <meta name="description" content={description} />
-  <meta name="keywords" content="Act,细胞调律,音游,节奏游戏,独立游戏,试玩版,Steam,paperactgames" />
+  <meta name="keywords" content="Act,细胞调律,手柄音游,音游,节奏游戏,试玩版,Steam,paperactgames,controller rhythm game,handheld rhythm game" />
   <meta name="author" content="PaperAct / 纸张lens" />
   <title>{title}</title>
 
   <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" hreflang="zh" href={siteUrl + '/'} />
+  <link rel="alternate" hreflang="en" href={siteUrl + '/?lang=en'} />
+  <link rel="alternate" hreflang="ja" href={siteUrl + '/?lang=ja'} />
+  <link rel="alternate" hreflang="x-default" href={siteUrl + '/'} />
   <link rel="icon" type="image/png" href="/Resources/icon.png" />
 
   <meta property="og:type" content="website" />
@@ -35,11 +39,43 @@ const translations = { zh, en, ja };
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
   <meta property="og:locale" content="zh_CN" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Act! 细胞调律",
+    "alternateName": "Act!",
+    "description": description,
+    "url": siteUrl,
+    "image": new URL(ogImage, siteUrl).href,
+    "genre": ["Rhythm", "Music"],
+    "gamePlatform": ["PC", "Steam"],
+    "applicationCategory": "Game",
+    "operatingSystem": "Windows",
+    "publisher": {
+      "@type": "Organization",
+      "name": "PaperAct",
+      "url": siteUrl
+    },
+    "author": {
+      "@type": "Person",
+      "name": "纸张lens",
+      "url": "https://x.com/paperlens1"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://store.steampowered.com/app/4369260/Act",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/PreOrder"
+    }
+  })}></script>
 </head>
 <body>
   <Navbar />

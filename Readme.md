@@ -185,4 +185,10 @@ npm run dev
 2. 添加站点，DNS 验证
 3. 提交 sitemap
 
+| 平台 | 提交入口 | 要提交的 Sitemap URL |
+|---|---|---|
+| Google Search Console | https://search.google.com/search-console | `https://paperactgames.com/sitemap-index.xml` |
+| Bing Webmaster Tools | https://www.bing.com/webmasters | `https://paperactgames.com/sitemap-index.xml` |
+| 百度站长平台 | https://ziyuan.baidu.com | `https://paperactgames.com/sitemap-index.xml` |
+
 > 提交后通常需要 1~4 周才能在搜索结果中出现。
