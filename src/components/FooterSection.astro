@@ -1,0 +1,34 @@
+---
+// 底栏组件
+---
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <img src="/Resources/logo_paperact.png" alt="PaperAct" class="footer-logo" />
+    </div>
+    <div class="footer-right">
+      <p class="footer-contact">商务联系：paperact@foxmail.com</p>
+      <p class="footer-contact">客服 QQ：3865529770</p>
+      <p class="footer-copyright">© 2026 PaperAct. All Rights Reserved.</p>
+    </div>
+  </div>
+    <div class="footer-down">
+      <p class="footer-anti-addiction">
+        抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当<br />
+        适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
+      </p>
+    </div>
+</footer>
+
+<style>
+  .site-footer { background: #1a1a1a; padding: 2rem 5%; min-height: 120px; }
+  .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: flex-start; gap: 4rem; }
+  .footer-left { display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-logo { height: 80px; width: auto; object-fit: contain; }
+  .footer-down { display: flex; justify-content: center; margin-top: 1.5rem; }
+  .footer-anti-addiction { font-size: 0.75rem; color: #888; line-height: 1.6; max-width: 400px; text-align: center; }
+  .footer-right { display: flex; flex-direction: column; gap: 0.5rem; text-align: right; }
+  .footer-contact { font-size: 0.875rem; color: #ccc; }
+  .footer-copyright { font-size: 0.75rem; color: #666; margin-top: 0.5rem; }
+  @media (max-width: 768px) { .footer-content { flex-direction: column; align-items: center; text-align: center; } .footer-left { align-items: center; } .footer-anti-addiction { text-align: center; } .footer-right { text-align: center; align-items: center; } }
+</style>

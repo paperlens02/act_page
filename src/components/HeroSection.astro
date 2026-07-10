@@ -41,6 +41,36 @@ const xUrl = 'https://x.com/paperlens1';
   </div>
 </section>
 
+<script>
+  // KV 背景图适配：保持 120% 放大，只在即将出现黑边时切换 cover
+  function checkKVBackground() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    
+    const w = hero.offsetWidth;
+    const h = hero.offsetHeight;
+    const ratio = w / h;
+    
+    // 图片原始比例 1920x1080 = 1.778
+    // 120% 放大后，覆盖范围 = 1.778 / 1.2 = 1.481
+    const imgRatio = 1920 / 1080;
+    const scaledRatio = imgRatio / 1.2;
+    
+    // 当容器比例超出放大后图片覆盖范围时，切换 cover
+    if (ratio < scaledRatio) {
+      hero.classList.add('kv-cover');
+    } else {
+      hero.classList.remove('kv-cover');
+    }
+  }
+  
+  // 立即执行一次
+  checkKVBackground();
+  
+  // 监听 resize
+  window.addEventListener('resize', checkKVBackground);
+</script>
+
 <style>
   @keyframes spinGlow {
     to { transform: rotate(360deg); }
@@ -68,8 +98,13 @@ const xUrl = 'https://x.com/paperlens1';
     background-color: #0a0a12;
     background-image: url('/Resources/KV1080P.png');
     background-repeat: no-repeat;
-    background-size: 120%;           /* ← 放大到 120%（可调，默认 100% 是 cover 效果） */
-    background-position: 25% center; /* ← 向右偏（50% 是正中，60% 是偏右 10%） */
+    background-size: 120%;          
+    background-position: 25% center;
+  }
+  
+  .hero.kv-cover {
+    background-size: cover;          
+    background-position: center;
   }
 
   .hero::after {

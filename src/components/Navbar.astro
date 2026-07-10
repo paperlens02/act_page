@@ -4,8 +4,9 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-content">
     <a href="/" class="navbar-brand">
-      <img src="/Resources/icon.png" alt="" class="navbar-icon" />
-      <span>Act!</span>
+      <img src="/Resources/logo_simple.png" alt="Act!" class="navbar-logo" data-logo-lang="zh" />
+      <img src="/Resources/logo_simple_en.png" alt="Act!" class="navbar-logo" data-logo-lang="en" />
+      <img src="/Resources/logo_simple_jp.png" alt="Act!" class="navbar-logo" data-logo-lang="ja" />
     </a>
     <div class="navbar-links">
       <a href="#hero" class="navbar-link" data-i18n="nav.home">主页</a>
@@ -63,12 +64,12 @@
     object-fit: contain;
   }
 
-  .navbar-brand span {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #00f3ff;
-    letter-spacing: 0.08em;
-    text-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
+  .navbar-logo {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    display: none;
+    filter: brightness(0.88) drop-shadow(0 0 2px rgba(0,243,255,0.5));
   }
 
   .navbar-links {
