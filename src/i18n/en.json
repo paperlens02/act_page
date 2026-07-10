@@ -3,9 +3,9 @@
     "home": "Home"
   },
   "hero": {
-    "subtitle": "Free-Input Rhythm Game — Play with a Controller from Your Couch! A Brand-New Rhythm Experience Arrives Early 2027!",
+    "subtitle": "A free-input rhythm game — kick back and play with a controller!<br>An all-new kind of rhythm experience arrives in early 2027!",
     "steam": "Download Demo",
-    "afdian": "Support me on Afdian",
+    "afdian": "Support Us on Afdian",
     "qq": "QQ Group",
     "bilibili": "Bilibili",
     "discord": "Discord",
@@ -14,33 +14,36 @@
   "character": {
     "rechor": {
       "name": "Rechor",
-      "desc": "A maintenance robot of unknown origin, tirelessly tending to equipment and tidying rooms... always fumbling into clumsy little accidents, yet seemingly built sturdy enough to never really get hurt. Polite and gentle in manner, but now and then her expression slips into something harder to read — as if she were hiding some extraordinary secret."
+      "desc": "A maintenance robot of unknown origin, forever tending to the equipment and tidying up the rooms. She's prone to clumsy little mishaps, yet built tough enough that she never really gets hurt. Polite and gentle in manner, though every so often an unreadable look crosses her face — as if she were keeping some extraordinary secret."
     },
     "eiria": {
       "name": "Eiria",
-      "desc": "A carefree, energetic girl who seems to come from somewhere unusual — could she actually be a young lady of high birth? She's utterly determined to push forward the Tuning Project, though it often looks more like she's just bossing people around. Her obsession with games and snacks is worrying; the lonely look that slips through now and then makes it hard to look away."
+      "desc": "A breezy, high-spirited girl who clearly comes from no ordinary background — could she secretly be a young lady of privilege? She's dead set on pushing the Tuning Project forward, though more often than not it looks like she's just bossing everyone around. Her obsession with games and snacks is a little worrying, and the flashes of loneliness she lets slip make her hard to look away from."
     }
   },
   "song": {
-    "title": "Hand-Picked Quality Tracks"
+    "title": "Only the Best Tracks"
   },
   "community": {
-    "title": "Join Our Community",
+    "title": "Join the Community",
     "qq": "QQ Group",
     "qqDetail": "893086747",
     "bilibili": "Bilibili",
-    "bilibiliDetail": "Follow us",
+    "bilibiliDetail": "Follow Us",
     "discord": "Discord",
-    "discordDetail": "Join server"
+    "discordDetail": "Join the Server"
   },
   "gameplay": {
     "tune": {
-      "title": "TUNE - Tuning Mode",
-      "desc": "A complete reinvention of traditional rhythm games!<br>No fixed keys — only free expression:<br>Under the rules of \"Note Affinity\", play the melody your way, with the fingering you love most."
+      "title": "TUNE Mode",
+      "desc": "A complete reinvention of the traditional rhythm game!<br>No fixed keys — only pure, free expression:<br>Under the \"Note Affinity\" system, play your own melody with the fingering you love best."
     },
     "fight": {
-      "title": "Fight - Battle Mode",
-      "desc": "Battle to the melody — against formidable foes, or perhaps old friends.<br>Attack, defend, unleash your Finishing Move — everything flows to the music.<br>Ride the rhythm, duel with conviction, and fight to save the world!"
+      "title": "Fight Mode",
+      "desc": "Face fearsome foes — or old friends — in the thick of the melody.<br>Attack, defend, unleash Finishing Moves — everything moves with the music.<br>Duel to the rhythm, and fight to save the world!"
     }
+  },
+  "footer": {
+    "business": "Business Inquiries: "
   }
 }
