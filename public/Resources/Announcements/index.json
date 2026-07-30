@@ -15,11 +15,18 @@
       "file": "announce_20260602.json"
     },
     {
-      "id": "20260530-feedback-update-1",
+      "id": "20260530-feedback-1",
       "date": "2026-05-30",
       "type": "update",
       "source": "Steam Community Announcements",
-      "file": "announce_20260530.json"
+      "file": "announce_20260530_feedback.json"
+    },
+    {
+      "id": "20260530-update-log-1",
+      "date": "2026-05-30",
+      "type": "update",
+      "source": "Steam Community Announcements",
+      "file": "announce_20260530_update.json"
     },
     {
       "id": "20260530-demo-launch",

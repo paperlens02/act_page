@@ -4,9 +4,9 @@
   "type": "update",
   "source": "Local (未发布至Steam)",
   "title": {
-    "zh": "《Act! 细胞调律》更新速览 v0.1.1",
-    "en": "Act! Autonomy: Cell-Tones — Update Overview v0.1.1",
-    "ja": "『Act! 細胞調律』アップデート情報 v0.1.1"
+    "zh": "《Act!》更新日记 #3 (v0.1.1)",
+    "en": "Act! Update Log #3 (v0.1.1)",
+    "ja": "『Act!』アップデートログ #3 (v0.1.1)"
   },
   "content": {
     "zh": "## 【全新曲目】\n\n**Celestite** — Lasun\n• Easy 2.12\n• Hard 8.44\n• Extreme 16.77\n\n**こんにちは、救いようのない……(Feat.:Ken)** — Chikanya\n• Hard 8.50\n• Extreme 14.04\n• Extreme++ 21.00\n（达到10级解锁）\n\n---\n\n## 【功能优化】\n\n**【全键位自由输入】**\n现在可以使用键盘上的任意按键进行游玩了！\n所有音符都不再要求具体按键，更自由，更畅快！\n\n**【死亡续打】**\n游戏失败后不再强制停止了。高难度也可以放心乱糊啦！\n\n**【后台静音】**\n设置中新增「后台静音」开关，切出游戏后会自动安静哦~\n\n---\n\n## 其他优化和Bug修复\n\n• 优化了选曲界面中选择谱面难度的操作。\n• 判定现在会更符合按键预期。\n• 修复了手柄玩家在使用键盘切换窗口后，按键图标反复闪烁的bug。\n• 修复了游戏内曲名展示不完整的bug。\n\n---\n\n2026.7.21 ©PaperAct",
