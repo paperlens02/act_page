@@ -24,10 +24,8 @@
         
         const titleEl = document.getElementById('announcement-bar-title');
         if (titleEl) {
-          // 存储所有语言的标题
-          titleEl.setAttribute('data-title-zh', announcement.title.zh);
-          titleEl.setAttribute('data-title-en', announcement.title.en);
-          titleEl.setAttribute('data-title-ja', announcement.title.ja);
+          // 存储所有语言的标题（JSON 形式，兼容任意语言代码）
+          titleEl.setAttribute('data-titles', JSON.stringify(announcement.title));
           // 根据当前语言显示
           const lang = document.documentElement.getAttribute('data-lang') || 'zh';
           titleEl.textContent = announcement.title[lang] || announcement.title.zh;
@@ -50,8 +48,10 @@
     const lang = e.detail.lang;
     const titleEl = document.getElementById('announcement-bar-title');
     if (titleEl) {
-      const title = titleEl.getAttribute(`data-title-${lang}`);
-      if (title) titleEl.textContent = title;
+      try {
+        const titles = JSON.parse(titleEl.getAttribute('data-titles') || '{}');
+        titleEl.textContent = titles[lang] || titles.zh || titleEl.textContent;
+      } catch (err) { /* ignore */ }
     }
   });
 </script>

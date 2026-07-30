@@ -6,11 +6,15 @@
   "title": {
     "zh": "《Act!》更新日记 #1",
     "en": "Act! Update Log #1",
-    "ja": "『Act!』アップデートログ #1"
+    "ja": "『Act!』アップデートログ #1",
+    "zh-tw": "《Act!》更新日記 #1",
+    "ko": "《Act!》 업데이트 일지 #1"
   },
   "content": {
     "zh": "《Act!》更新日记 #1 (5月30日)\n\n于5月30日下午17:00 发布更新：\n\n1. 在设置界面中可以设置您的按键习惯了。\n2. 已支持SFX和hitsound音效分别设置音量。\n3. 默认使音符中央显示一个亮点，来改善读谱。您可以在暂停界面中按Options(右上角)开关这个功能。\n4. 现在可以在入口界面或在暂停界面随时查看玩法教程了。\n5. 看板娘现在会在入口界面和您说话了。未来将会逐步增加许多对话内容和对话场景，敬请期待！\n\n辛苦您更新后继续游玩，感谢您的支持！\n\n---\n\n2026.5.30 ©PaperAct",
     "en": "Act! Update Log #1 (May 30)\n\nUpdate released at 17:00 on May 30:\n\n1. You can now set your preferred button convention in Settings.\n2. Separate volume controls for SFX and hitsounds are now supported.\n3. A bright dot now appears at the center of notes by default to improve readability. You can toggle this in the pause menu via Options (top-right).\n4. You can now view the gameplay tutorial anytime from the lobby or pause screen.\n5. The character mascot now talks to you on the lobby screen. More dialogue content and scenarios will be added over time — stay tuned!\n\nThank you for updating and continuing to play. We appreciate your support!\n\n---\n\n2026.5.30 ©PaperAct",
-    "ja": "『Act!』アップデートログ #1（5月30日）\n\n5月30日 17:00にアップデートを配信：\n\n1. 設定画面でボタンの習慣を設定できるようになりました。\n2. SEとヒットサウンドの個別音量設定に対応しました。\n3. ノーツ中央に明るいドットがデフォルトで表示され、読譜性が向上しました。ポーズ画面のOptions（右上）でON/OFFできます。\n4. ロビー画面やポーズ画面からいつでもゲームプレイチュートリアルを確認できるようになりました。\n5. 看板キャラがロビー画面で話しかけてくれるようになりました。今後、対話コンテンツやシーンを順次追加予定です。お楽しみに！\n\nアップデート後も引き続きプレイいただけると幸いです。ご支援ありがとうございます！\n\n---\n\n2026.5.30 ©PaperAct"
+    "ja": "『Act!』アップデートログ #1（5月30日）\n\n5月30日 17:00にアップデートを配信：\n\n1. 設定画面でボタンの習慣を設定できるようになりました。\n2. SEとヒットサウンドの個別音量設定に対応しました。\n3. ノーツ中央に明るいドットがデフォルトで表示され、読譜性が向上しました。ポーズ画面のOptions（右上）でON/OFFできます。\n4. ロビー画面やポーズ画面からいつでもゲームプレイチュートリアルを確認できるようになりました。\n5. 看板キャラがロビー画面で話しかけてくれるようになりました。今後、対話コンテンツやシーンを順次追加予定です。お楽しみに！\n\nアップデート後も引き続きプレイいただけると幸いです。ご支援ありがとうございます！\n\n---\n\n2026.5.30 ©PaperAct",
+    "zh-tw": "《Act!》更新日記 #1 (5月30日)\n\n於5月30日下午17:00 發布更新：\n\n1. 在設定介面中可以設定您的按鍵習慣了。\n2. 已支援SFX和hitsound音效分別設定音量。\n3. 預設使音符中央顯示一個亮點，來改善讀譜。您可以在暫停介面中按Options(右上角)開關這個功能。\n4. 現在可以在入口介面或在暫停介面隨時查看玩法教學了。\n5. 看板娘現在會在入口介面和您說話了。未來將會逐步增加許多對話內容和對話場景，敬請期待！\n\n辛苦您更新後繼續遊玩，感謝您的支持！\n\n---\n\n2026.5.30 ©PaperAct",
+    "ko": "《Act!》 업데이트 일지 #1 (5월 30일)\n\n5월 30일 17:00에 업데이트를 배포했습니다:\n\n1. 설정 화면에서 버튼 관습을 설정할 수 있습니다.\n2. SFX와 히트사운드의 음량을 각각 설정할 수 있습니다.\n3. 가독성 향상을 위해 노트 중앙에 밝은 점이 기본 표시됩니다. 일시정지 화면의 Options(우측 상단)에서 켜고 끌 수 있습니다.\n4. 로비 화면과 일시정지 화면에서 언제든지 플레이 튜토리얼을 볼 수 있습니다.\n5. 마스코트 캐릭터가 로비 화면에서 말을 걸어옵니다. 앞으로 대화 내용과 장면을 계속 추가할 예정이니 기대해 주세요!\n\n업데이트 후에도 즐겁게 플레이해 주시길 바랍니다. 성원에 감사드립니다!\n\n---\n\n2026.5.30 ©PaperAct"
   }
 }

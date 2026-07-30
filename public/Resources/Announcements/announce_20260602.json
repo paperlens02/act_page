@@ -6,11 +6,15 @@
   "title": {
     "zh": "《Act!》更新日记 #2",
     "en": "Act! Update Log #2",
-    "ja": "『Act!』アップデートログ #2"
+    "ja": "『Act!』アップデートログ #2",
+    "zh-tw": "《Act!》更新日記 #2",
+    "ko": "《Act!》 업데이트 일지 #2"
   },
   "content": {
     "zh": "Act! 更新日记 #2：\n\n1. 大幅优化了游戏性能。游玩过程中，CPU耗时降低20%，GPU批次降低50%，渲染顶点数降低90%。\n2. 修复了分享截图时背景可能出现透明的bug。\n3. 改善了英文UI的表现。\n4. 修复了部分曲目在重试时可能卡死的问题。\n5. 很高兴地宣布，我们的官方Discord服务器现已开放！直接加入：https://discord.gg/9yhcHNqTkV\n\n辛苦您更新后继续游玩，感谢您的支持！\n\n---\n\n2026.6.2 ©PaperAct",
     "en": "Act! Update Notes #2:\n\n1. Significantly optimized game performance. During gameplay, CPU time reduced by 20%, GPU batches reduced by 50%, and rendered vertices reduced by 90%.\n2. Fixed a bug where the background could appear transparent when sharing screenshots.\n3. Improved the English UI presentation.\n4. Fixed an issue where some tracks could freeze when retrying.\n5. I'm excited to announce that our official Discord server is now open! Join us directly at https://discord.gg/9yhcHNqTkV\n\nThank you for updating and continuing to play, and thank you for your support!\n\n---\n\n2026.6.2 ©PaperAct",
-    "ja": "Act! アップデートノート #2：\n\n1. ゲームのパフォーマンスを大幅に最適化しました。プレイ中のCPU負荷を20%削減、GPUバッチを50%削減、描画頂点数を90%削減。\n2. スクリーンショット共有時に背景が透明になるバグを修正しました。\n3. 英語UIの表示を改善しました。\n4. 一部の楽曲でリトライ時にフリーズする問題を修正しました。\n5. 公式Discordサーバーがオープンしました！こちらから参加できます：https://discord.gg/9yhcHNqTkV\n\nアップデート後も引き続きプレイいただけると幸いです。ご支援ありがとうございます！\n\n---\n\n2026.6.2 ©PaperAct"
+    "ja": "Act! アップデートノート #2：\n\n1. ゲームのパフォーマンスを大幅に最適化しました。プレイ中のCPU負荷を20%削減、GPUバッチを50%削減、描画頂点数を90%削減。\n2. スクリーンショット共有時に背景が透明になるバグを修正しました。\n3. 英語UIの表示を改善しました。\n4. 一部の楽曲でリトライ時にフリーズする問題を修正しました。\n5. 公式Discordサーバーがオープンしました！こちらから参加できます：https://discord.gg/9yhcHNqTkV\n\nアップデート後も引き続きプレイいただけると幸いです。ご支援ありがとうございます！\n\n---\n\n2026.6.2 ©PaperAct",
+    "zh-tw": "Act! 更新日記 #2：\n\n1. 大幅優化了遊戲效能。遊玩過程中，CPU耗時降低20%，GPU批次降低50%，渲染頂點數降低90%。\n2. 修復了分享截圖時背景可能出現透明的bug。\n3. 改善了英文UI的表現。\n4. 修復了部分曲目在重試時可能卡死的問題。\n5. 很高興地宣布，我們的官方Discord伺服器現已開放！直接加入：https://discord.gg/9yhcHNqTkV\n\n辛苦您更新後繼續遊玩，感謝您的支持！\n\n---\n\n2026.6.2 ©PaperAct",
+    "ko": "Act! 업데이트 일지 #2:\n\n1. 게임 성능을 대폭 최적화했습니다. 플레이 중 CPU 소요 시간 20% 감소, GPU 배치 50% 감소, 렌더링 정점 수 90% 감소.\n2. 스크린샷 공유 시 배경이 투명해질 수 있는 버그를 수정했습니다.\n3. 영어 UI 표현을 개선했습니다.\n4. 일부 곡에서 재시도 시 멈출 수 있는 문제를 수정했습니다.\n5. 공식 Discord 서버가 열렸음을 기쁘게 알립니다! 바로 참여: https://discord.gg/9yhcHNqTkV\n\n업데이트 후에도 즐겁게 플레이해 주시길 바랍니다. 성원에 감사드립니다!\n\n---\n\n2026.6.2 ©PaperAct"
   }
 }

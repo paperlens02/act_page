@@ -1,8 +1,10 @@
 ﻿---
 import Navbar from '../components/Navbar.astro';
 import zh from '../i18n/zh.json';
+import zhTW from '../i18n/zh-tw.json';
 import en from '../i18n/en.json';
 import ja from '../i18n/ja.json';
+import ko from '../i18n/ko.json';
 
 const { title = 'Act! 细胞调律 | 手柄音游 官方网站 | Steam试玩版已开放' } = Astro.props;
 
@@ -11,7 +13,7 @@ const description = '自由输入手柄音游《Act! 细胞调律》Steam免费�
 const ogImage = '/Resources/KV1080P.png';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
-const translations = { zh, en, ja };
+const translations = { zh, 'zh-tw': zhTW, en, ja, ko };
 ---
 
 <!DOCTYPE html>
@@ -27,8 +29,10 @@ const translations = { zh, en, ja };
 
   <link rel="canonical" href={canonicalUrl} />
   <link rel="alternate" hreflang="zh" href={siteUrl + '/'} />
+  <link rel="alternate" hreflang="zh-TW" href={siteUrl + '/?lang=zh-tw'} />
   <link rel="alternate" hreflang="en" href={siteUrl + '/?lang=en'} />
   <link rel="alternate" hreflang="ja" href={siteUrl + '/?lang=ja'} />
+  <link rel="alternate" hreflang="ko" href={siteUrl + '/?lang=ko'} />
   <link rel="alternate" hreflang="x-default" href={siteUrl + '/'} />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="/Resources/icon.png" sizes="512x512" />
@@ -41,8 +45,10 @@ const translations = { zh, en, ja };
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
   <meta property="og:locale" content="zh_CN" />
+  <meta property="og:locale:alternate" content="zh_TW" />
   <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ko_KR" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
@@ -100,7 +106,8 @@ const translations = { zh, en, ja };
       currentLang = lang;
       localStorage.setItem('lang', lang);
       document.documentElement.setAttribute('data-lang', lang);
-      document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : lang);
+      const langAttrMap = { 'zh': 'zh-CN', 'zh-tw': 'zh-TW' };
+      document.documentElement.setAttribute('lang', langAttrMap[lang] || lang);
       
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -132,9 +139,11 @@ const translations = { zh, en, ja };
         el.style.display = hiddenLangs.includes(lang) ? 'none' : '';
       });
 
-      // Switch logo based on language
+      // Switch logo based on language（繁中复用简中logo，韩语复用英文logo）
+      const logoLangMap = { 'zh-tw': 'zh', 'ko': 'en' };
+      const logoLang = logoLangMap[lang] || lang;
       document.querySelectorAll('[data-logo-lang]').forEach(img => {
-        img.style.display = img.getAttribute('data-logo-lang') === lang ? 'block' : 'none';
+        img.style.display = img.getAttribute('data-logo-lang') === logoLang ? 'block' : 'none';
       });
 
       // 多语言 <title> 与 meta 描述（zh 无 meta 键，用 SSR 默认值兜底）
