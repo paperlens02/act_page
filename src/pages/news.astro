@@ -1,0 +1,381 @@
+---
+// 公告页：左侧列表 + 右侧正文
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="公告 | Act! 细胞调律">
+  <main class="news-page">
+    <div class="news-container">
+      <aside class="news-sidebar" id="news-sidebar">
+        <h2 class="news-sidebar-title" data-i18n="news.pageTitle">公告</h2>
+        <ul class="news-list" id="news-list">
+          <!-- 动态填充 -->
+        </ul>
+      </aside>
+      <article class="news-content" id="news-content">
+        <div class="news-content-placeholder" data-i18n="news.noContent">暂无公告</div>
+      </article>
+    </div>
+  </main>
+
+<script>
+  let newsListEl;
+  let newsContentEl;
+  let allAnnouncements = [];
+  let currentId = null;
+
+  function getLang() {
+    return document.documentElement.getAttribute('data-lang') || 'zh';
+  }
+
+  async function loadAnnouncements() {
+    try {
+      newsListEl = document.getElementById('news-list');
+      newsContentEl = document.getElementById('news-content');
+      if (!newsListEl || !newsContentEl) {
+        console.warn('News elements not found in DOM');
+        return;
+      }
+
+      const res = await fetch('/Resources/Announcements/index.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      
+      // 加载所有公告内容
+      const promises = data.announcements.map(async (item) => {
+        const fileRes = await fetch(`/Resources/Announcements/${item.file}`);
+        if (!fileRes.ok) throw new Error(`Failed to load ${item.file}`);
+        return await fileRes.json();
+      });
+      allAnnouncements = await Promise.all(promises);
+      
+      renderList();
+      
+      // 检查 URL hash，选中对应公告
+      const hash = window.location.hash.slice(1);
+      const target = allAnnouncements.find(a => a.id === hash);
+      if (target) {
+        selectAnnouncement(target.id);
+      } else if (allAnnouncements.length > 0) {
+        selectAnnouncement(allAnnouncements[0].id);
+      }
+    } catch (e) {
+      console.error('Failed to load announcements:', e);
+      if (newsContentEl) {
+        newsContentEl.innerHTML = '<div class="news-content-placeholder">加载失败，请刷新重试</div>';
+      }
+    }
+  }
+
+  function renderList() {
+    const lang = getLang();
+    newsListEl.innerHTML = allAnnouncements.map(a => `
+      <li class="news-list-item ${a.id === currentId ? 'active' : ''}" data-id="${a.id}">
+        <span class="news-list-date">${a.date}</span>
+        <span class="news-list-title">${a.title[lang] || a.title.zh}</span>
+      </li>
+    `).join('');
+
+    // 绑定点击事件
+    newsListEl.querySelectorAll('.news-list-item').forEach(item => {
+      item.addEventListener('click', () => {
+        selectAnnouncement(item.getAttribute('data-id'));
+      });
+    });
+  }
+
+  function selectAnnouncement(id) {
+    currentId = id;
+    const lang = getLang();
+    const announcement = allAnnouncements.find(a => a.id === id);
+    if (!announcement) return;
+
+    // 更新列表高亮
+    newsListEl.querySelectorAll('.news-list-item').forEach(item => {
+      item.classList.toggle('active', item.getAttribute('data-id') === id);
+    });
+
+    // 渲染正文
+    const content = announcement.content[lang] || announcement.content.zh;
+    const title = announcement.title[lang] || announcement.title.zh;
+    
+    newsContentEl.innerHTML = `
+      <header class="news-content-header">
+        <h1 class="news-content-title">${escapeHtml(title)}</h1>
+        <time class="news-content-date">${announcement.date}</time>
+      </header>
+      <div class="news-content-body">${formatContent(content)}</div>
+    `;
+
+    // 更新 URL hash（不触发滚动）
+    history.replaceState(null, '', `#${id}`);
+
+    // 移动端：滚动到正文区域
+    if (window.innerWidth <= 768) {
+      newsContentEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function formatContent(text) {
+    // 简单的 Markdown-like 格式化
+    return text
+      .split('\n')
+      .map(line => {
+        // 标题
+        if (line.startsWith('## ')) return `<h2>${escapeHtml(line.slice(3))}</h2>`;
+        if (line.startsWith('# ')) return `<h1>${escapeHtml(line.slice(2))}</h1>`;
+        // 分隔线
+        if (line.trim() === '---') return '<hr>';
+        // 列表项
+        if (line.startsWith('• ') || line.startsWith('* ')) return `<li>${escapeHtml(line.slice(2))}</li>`;
+        // 带序号的列表
+        if (/^\d+\.\s/.test(line)) return `<li>${escapeHtml(line)}</li>`;
+        // Q&A 格式
+        if (line.startsWith('Q: ') || line.startsWith('Q：')) return `<p class="news-qa-q"><strong>${escapeHtml(line)}</strong></p>`;
+        if (line.startsWith('A: ') || line.startsWith('A：')) return `<p class="news-qa-a"><em>${escapeHtml(line)}</em></p>`;
+        // 加粗
+        if (line.startsWith('**') && line.endsWith('**')) return `<p><strong>${escapeHtml(line.slice(2, -2))}</strong></p>`;
+        // 空行
+        if (line.trim() === '') return '<br>';
+        // 普通段落
+        return `<p>${escapeHtml(line)}</p>`;
+      })
+      .join('\n');
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      // 还原 **bold** 格式
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  }
+
+  // 确保 DOM 就绪后执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAnnouncements);
+  } else {
+    loadAnnouncements();
+  }
+
+  // 语言切换时重新渲染
+  window.addEventListener('langChange', () => {
+    renderList();
+    if (currentId) selectAnnouncement(currentId);
+  });
+</script>
+</Layout>
+
+<style is:global>
+  /* 禁用首页的 scroll-snap 行为 */
+  html:has(.news-page) {
+    scroll-snap-type: none;
+  }
+
+  .news-page {
+    min-height: 100vh;
+    padding-top: 56px; /* navbar height */
+    background: #0a0a12;
+  }
+
+  .news-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: calc(100vh - 56px);
+  }
+
+  /* 左侧列表 */
+  .news-sidebar {
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 56px);
+    position: sticky;
+    top: 56px;
+  }
+
+  .news-sidebar-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00f3ff;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .news-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .news-list-item {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .news-list-item:hover {
+    background: rgba(0, 243, 255, 0.05);
+    border-color: rgba(0, 243, 255, 0.1);
+  }
+
+  .news-list-item.active {
+    background: rgba(0, 243, 255, 0.1);
+    border-color: rgba(0, 243, 255, 0.3);
+  }
+
+  .news-list-date {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: monospace;
+  }
+
+  .news-list-title {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+  }
+
+  .news-list-item.active .news-list-title {
+    color: #00f3ff;
+  }
+
+  /* 右侧正文 */
+  .news-content {
+    padding: 2.5rem 3rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 56px);
+  }
+
+  .news-content-placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding-top: 4rem;
+    font-size: 1rem;
+  }
+
+  .news-content-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .news-content-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .news-content-date {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: monospace;
+  }
+
+  .news-content-body {
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+  }
+
+  .news-content-body h1 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin: 1.5rem 0 0.75rem;
+    font-weight: 700;
+  }
+
+  .news-content-body h2 {
+    font-size: 1.1rem;
+    color: #00f3ff;
+    margin: 1.5rem 0 0.75rem;
+    font-weight: 700;
+  }
+
+  .news-content-body p {
+    margin-bottom: 0.4rem;
+  }
+
+  .news-content-body li {
+    margin-left: 1.5rem;
+    margin-bottom: 0.4rem;
+    list-style: none;
+    position: relative;
+    padding-left: 0.5rem;
+  }
+
+  .news-content-body li::before {
+    content: '';
+    position: absolute;
+    left: -0.75rem;
+    top: 0.6em;
+    width: 5px;
+    height: 5px;
+    background: #00f3ff;
+    border-radius: 50%;
+  }
+
+  .news-content-body hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
+  }
+
+  .news-content-body br {
+    display: block;
+    content: '';
+    margin-top: 0.5rem;
+  }
+
+  .news-content-body .news-qa-q {
+    color: #ffffff;
+    margin-top: 1rem;
+  }
+
+  .news-content-body .news-qa-a {
+    color: rgba(200, 230, 255, 0.85);
+    padding-left: 1rem;
+    border-left: 2px solid rgba(0, 243, 255, 0.3);
+    margin-bottom: 1rem;
+  }
+
+  .news-content-body strong {
+    color: #ffffff;
+  }
+
+  .news-content-body a {
+    color: #00f3ff;
+    text-decoration: underline;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .news-container {
+      grid-template-columns: 1fr;
+    }
+
+    .news-sidebar {
+      position: static;
+      max-height: none;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.5rem 1rem;
+    }
+
+    .news-content {
+      max-height: none;
+      padding: 1.5rem 1rem;
+    }
+  }
+</style>

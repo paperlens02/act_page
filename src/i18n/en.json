@@ -1,6 +1,13 @@
 {
   "nav": {
-    "home": "Home"
+    "home": "Home",
+    "news": "News"
+  },
+  "news": {
+    "barPrefix": "Latest",
+    "viewAll": "View All",
+    "pageTitle": "News",
+    "noContent": "No announcements yet"
   },
   "hero": {
     "subtitle": "A free-input rhythm game — kick back and play with a controller!<br>An all-new kind of rhythm experience arrives in early 2027!",

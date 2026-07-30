@@ -1,0 +1,39 @@
+{
+  "announcements": [
+    {
+      "id": "20260721-update-v011",
+      "date": "2026-07-21",
+      "type": "update",
+      "source": "Local (未发布至Steam)",
+      "file": "announce_20260721.json"
+    },
+    {
+      "id": "20260602-update-log-2",
+      "date": "2026-06-02",
+      "type": "update",
+      "source": "Steam Community Announcements",
+      "file": "announce_20260602.json"
+    },
+    {
+      "id": "20260530-feedback-update-1",
+      "date": "2026-05-30",
+      "type": "update",
+      "source": "Steam Community Announcements",
+      "file": "announce_20260530.json"
+    },
+    {
+      "id": "20260530-demo-launch",
+      "date": "2026-05-30",
+      "type": "announcement",
+      "source": "Steam Community Announcements",
+      "file": "announce_20260530_demo.json"
+    },
+    {
+      "id": "20260222-first-reveal",
+      "date": "2026-02-22",
+      "type": "announcement",
+      "source": "Multi-platform",
+      "file": "announce_20260222.json"
+    }
+  ]
+}

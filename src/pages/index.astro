@@ -1,6 +1,7 @@
 ﻿---
 // 首页：组装所有区域组件
 import Layout from '../layouts/Layout.astro';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
 import HeroSection from '../components/HeroSection.astro';
 import CharacterSection from '../components/CharacterSection.astro';
 import SongSection from '../components/SongSection.astro';
@@ -8,7 +9,10 @@ import GameplaySection from '../components/GameplaySection.astro';
 import FooterSection from '../components/FooterSection.astro';
 ---
 <Layout title="Act! 细胞调律 官方网站 | Steam试玩版已开放">
-  <HeroSection />
+  <div class="hero-wrapper">
+    <HeroSection />
+    <AnnouncementBar />
+  </div>
   <CharacterSection />
   <SongSection />
   <GameplaySection
@@ -75,4 +79,10 @@ import FooterSection from '../components/FooterSection.astro';
     if (songsEl) songsEl.classList.add('is-inview');
   }
 </script>
+
+<style is:global>
+  .hero-wrapper {
+    position: relative;
+  }
+</style>
 </Layout>

@@ -1,6 +1,13 @@
 {
   "nav": {
-    "home": "主页"
+    "home": "主页",
+    "news": "公告"
+  },
+  "news": {
+    "barPrefix": "最新公告",
+    "viewAll": "查看全部",
+    "pageTitle": "公告",
+    "noContent": "暂无公告"
   },
   "hero": {
     "subtitle": "自由输入，手柄躺玩！全新音游玩法将于2027年初正式登场！",
