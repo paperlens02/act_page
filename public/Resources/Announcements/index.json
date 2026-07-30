@@ -1,6 +1,13 @@
 {
   "announcements": [
     {
+      "id": "20260730-feedback-2",
+      "date": "2026-07-30",
+      "type": "update",
+      "source": "Official",
+      "file": "announce_20260730_feedback.json"
+    },
+    {
       "id": "20260721-update-v011",
       "date": "2026-07-21",
       "type": "update",
