@@ -1,11 +1,11 @@
 {
   "announcements": [
     {
-      "id": "20260730-roadmap-1",
-      "date": "2026-07-30",
+      "id": "20260731-roadmap-1",
+      "date": "2026-07-31",
       "type": "announcement",
       "source": "Official",
-      "file": "announce_20260730_roadmap.json"
+      "file": "announce_20260731_roadmap.json"
     },
     {
       "id": "20260730-feedback-2",
