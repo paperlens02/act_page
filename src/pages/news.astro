@@ -138,25 +138,12 @@ import Layout from '../layouts/Layout.astro';
         if (line.startsWith('A: ') || line.startsWith('A：')) return `<p class="news-qa-a"><em>${escapeHtml(line)}</em></p>`;
         // 加粗
         if (line.startsWith('**') && line.endsWith('**')) return `<p><strong>${escapeHtml(line.slice(2, -2))}</strong></p>`;
-        // 空行
-        if (line.trim() === '') return '<br>';
+        // 空行不渲染，段落间距由 CSS margin 控制
+        if (line.trim() === '') return '';
         // 普通段落
         return `<p>${escapeHtml(line)}</p>`;
       });
-    // 去除块级元素（标题/分隔线/列表）前后的空行，合并连续空行，避免与 CSS margin 叠加
-    const isBlock = (html) => /^<(h\d|hr|li)/.test(html);
-    const out = [];
-    for (const html of mapped) {
-      if (html === '<br>') {
-        const prev = out[out.length - 1];
-        if (!prev || prev === '<br>' || isBlock(prev)) continue;
-        out.push(html);
-      } else {
-        if (isBlock(html) && out[out.length - 1] === '<br>') out.pop();
-        out.push(html);
-      }
-    }
-    return out.join('\n');
+    return mapped.filter(Boolean).join('\n');
   }
 
   function escapeHtml(str) {
@@ -323,7 +310,7 @@ import Layout from '../layouts/Layout.astro';
   .news-content-body h3 {
     font-size: 1rem;
     color: #00f3ff;
-    margin: 1.25rem 0 0.6rem;
+    margin: 2.5rem 0 0.8rem;
     font-weight: 700;
   }
 
