@@ -121,12 +121,16 @@ import Layout from '../layouts/Layout.astro';
       .split('\n')
       .map(line => {
         // 标题
+        if (line.startsWith('### ')) return `<h3>${escapeHtml(line.slice(4))}</h3>`;
         if (line.startsWith('## ')) return `<h2>${escapeHtml(line.slice(3))}</h2>`;
         if (line.startsWith('# ')) return `<h1>${escapeHtml(line.slice(2))}</h1>`;
         // 分隔线
         if (line.trim() === '---') return '<hr>';
+        // 嵌套子列表项（Tab 或 2 个以上空格缩进）
+        const nested = line.match(/^(?:\t+| {2,})(?:[-•*] )(.*)$/);
+        if (nested) return `<li class="nested">${escapeHtml(nested[1])}</li>`;
         // 列表项
-        if (line.startsWith('• ') || line.startsWith('* ')) return `<li>${escapeHtml(line.slice(2))}</li>`;
+        if (line.startsWith('• ') || line.startsWith('* ') || line.startsWith('- ')) return `<li>${escapeHtml(line.slice(2))}</li>`;
         // 带序号的列表
         if (/^\d+\.\s/.test(line)) return `<li>${escapeHtml(line)}</li>`;
         // Q&A 格式
@@ -303,6 +307,13 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 700;
   }
 
+  .news-content-body h3 {
+    font-size: 1rem;
+    color: #00f3ff;
+    margin: 1.25rem 0 0.6rem;
+    font-weight: 700;
+  }
+
   .news-content-body p {
     margin-bottom: 0.4rem;
   }
@@ -324,6 +335,16 @@ import Layout from '../layouts/Layout.astro';
     height: 5px;
     background: #00f3ff;
     border-radius: 50%;
+  }
+
+  .news-content-body li.nested {
+    margin-left: 3rem;
+  }
+
+  .news-content-body li.nested::before {
+    background: rgba(0, 243, 255, 0.45);
+    width: 4px;
+    height: 4px;
   }
 
   .news-content-body hr {
