@@ -117,7 +117,7 @@ import Layout from '../layouts/Layout.astro';
 
   function formatContent(text) {
     // 简单的 Markdown-like 格式化
-    return text
+    const mapped = text
       .split('\n')
       .map(line => {
         // 标题
@@ -142,8 +142,21 @@ import Layout from '../layouts/Layout.astro';
         if (line.trim() === '') return '<br>';
         // 普通段落
         return `<p>${escapeHtml(line)}</p>`;
-      })
-      .join('\n');
+      });
+    // 去除块级元素（标题/分隔线/列表）前后的空行，合并连续空行，避免与 CSS margin 叠加
+    const isBlock = (html) => /^<(h\d|hr|li)/.test(html);
+    const out = [];
+    for (const html of mapped) {
+      if (html === '<br>') {
+        const prev = out[out.length - 1];
+        if (!prev || prev === '<br>' || isBlock(prev)) continue;
+        out.push(html);
+      } else {
+        if (isBlock(html) && out[out.length - 1] === '<br>') out.pop();
+        out.push(html);
+      }
+    }
+    return out.join('\n');
   }
 
   function escapeHtml(str) {
