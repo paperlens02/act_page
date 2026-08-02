@@ -136,8 +136,8 @@ import Layout from '../layouts/Layout.astro';
         // Q&A 格式
         if (line.startsWith('Q: ') || line.startsWith('Q：')) return `<p class="news-qa-q"><strong>${escapeHtml(line)}</strong></p>`;
         if (line.startsWith('A: ') || line.startsWith('A：')) return `<p class="news-qa-a"><em>${escapeHtml(line)}</em></p>`;
-        // 加粗
-        if (line.startsWith('**') && line.endsWith('**')) return `<p><strong>${escapeHtml(line.slice(2, -2))}</strong></p>`;
+        // 加粗：整行加粗视为 h4 子标题，否则按普通段落处理
+        if (line.startsWith('**') && line.endsWith('**')) return `<h4>${escapeHtml(line.slice(2, -2))}</h4>`;
         // 空行不渲染，段落间距由 CSS margin 控制
         if (line.trim() === '') return '';
         // 普通段落
@@ -312,6 +312,14 @@ import Layout from '../layouts/Layout.astro';
     color: #00f3ff;
     margin: 2.5rem 0 0.8rem;
     font-weight: 700;
+  }
+
+  .news-content-body h4 {
+    font-size: 0.95rem;
+    color: #e0f8ff;
+    margin: 1.1rem 0 0.4rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
   .news-content-body p {

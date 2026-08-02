@@ -1,6 +1,13 @@
 {
   "announcements": [
     {
+      "id": "20260802-diary-4",
+      "date": "2026-08-02",
+      "type": "announcement",
+      "source": "Official",
+      "file": "announce_20260802_diary4.json"
+    },
+    {
       "id": "20260731-roadmap-1",
       "date": "2026-07-31",
       "type": "announcement",
